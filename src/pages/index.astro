@@ -1,8 +1,42 @@
 ---
-import astroLogo from '../assets/astro.svg';
-import background from '../assets/background.svg';
 import { STRAPI_URL } from 'astro:env/server';
 import MyFooter from '../components/MyFooter.astro';
+
+const cookie = Astro.cookies.get('site_lang');
+const lang = cookie?.value ;//|| 'en';
+
+// 2. Map 'ar' to 'ar-EG' if your Strapi uses specific region codes
+const strapiLocale = lang === 'ar' ? 'ar-EG' : 'en';
+
+// 3. Construct the Dynamic Path
+// Note: We use &populate=* to ensure images/relations are returned
+// const STRAPI_URL2 = "http://localhost:1337"; // Or process.env.STRAPI_URL
+const sPath = `${STRAPI_URL}/api/homes?locale=${strapiLocale}&populate=*`;
+
+
+
+async function getHomeData(){
+  const response = await fetch(sPath);
+  const data = await response.json() ;
+  return data.data[0];
+}
+
+const HomeData = await getHomeData();
+
+
+function extractNumber(value = '') {
+  // handle ratios like 24/7 → 24
+  if (value.includes('/')) {
+    return Number(value.split('/')[0]);
+  }
+
+  // extract first full number (including commas)
+  const match = value.match(/[\d,]+/);
+
+  if (!match) return 0;
+
+  return Number(match[0].replace(/,/g, ''));
+}
 ---
 <!DOCTYPE html>
 <html lang="en" class="page-home">
@@ -220,14 +254,14 @@ import MyFooter from '../components/MyFooter.astro';
         <section id="home" class="hero">
             <div class="container">
                 <div class="hero-content">
-                    <h1 class="hero-title">
-                        Your Companion to <span class="gradient-text">Wellness</span>
-                    </h1>
-                    
+                    <h1 class="hero-title" set:html={HomeData.PageTitle}></h1>
+
                     <p class="hero-description">
-                        MedSure is your trusted Third Party Administrator in Egypt, providing end-to-end healthcare management, 
-                        claims processing, and digital support for employers, insurers, and individuals.
-						 <img src="/images/5ff482c661b8fef84394377b_AdobeStock_117537974.jpeg" />
+                       {HomeData.PageDescription}
+						 <img
+  src={`${STRAPI_URL}${HomeData.Image?.url}`}
+  
+/>
                     </p>
 
                     <!--<div class="hero-buttons">
@@ -274,76 +308,185 @@ import MyFooter from '../components/MyFooter.astro';
 
 
 
-		<section id="metrics" class="metrics-section">
-        <div class="container">
-            <h2>MedSure in figures</h2>
-            <div class="metrics-grid">
-                <div class="metric-item">
-                    <div class="metric-number" data-target="90000" data-addPlus="true">0</div>
-                    <div class="metric-label">beneficiaries served nationwide</div>
-                </div>
-                <div class="metric-item">
-                    <div class="metric-number" data-target="500"  data-addPlus="true">0</div><div class="metric-unit">million</div>
-                    <div class="metric-label">annual claims payment rate</div>
-                </div>
-                <div class="metric-item">
-                    <div class="metric-number" data-target="4800" data-addPlus="true">0</div>
-                    <div class="metric-label">providers across Egypt</div>
-                </div>
-                <div class="metric-item">
-                    <div class="metric-number" data-target="140" data-addPlus="true">0</div>
-                    <div class="metric-label">clients / companies</div>
-                </div>
-                <div class="metric-item">
-                    <div class="metric-number" data-target="20" data-addPlus="true">0</div>
-                    <div class="metric-label">insurer / payer</div>
-                </div>
-				
-				<div class="metric-item">
-				<div class="metric-number" data-target="100">0</div><div class="metric-unit">%</div>
-                    <div class="metric-label">Online 2nd point of service providers.</div>
-                </div>
-				<div class="metric-item">
-				<div class="metric-number" data-target="100">0</div><div class="metric-unit">%</div>
-                    <div class="metric-label">E-card services availability.</div>
-                </div>
-                <div class="metric-item">
-				<div class="metric-number" data-target="88">0</div><div class="metric-unit">%</div>
-                    <div class="metric-label">E-claim services availability. Paperless services.</div>
-                </div>
-                <!--<div class="metric-item">
-                    <div class="metric-label">74% of approvals are digitalized.</div>
-                </div>
-                <div class="metric-item">
-                    <div class="metric-label">88% of approvals are obtained by providers.</div>
-                </div>-->
-				 <div class="metric-item">
-				 <div class="metric-number" data-target="24">0</div><div class="metric-unit">/</div><div class="metric-number" data-target="7">0</div>
-                    <div class="metric-label">Approvals and call center support.</div>
-                </div>
-		
-                <div class="metric-item">
-				<div class="metric-number" data-target="15">0</div><div class="metric-unit">min</div>
-                    <div class="metric-label">Average approval time for outpatient.</div>
-                </div>
-				<div class="metric-item">
-				<div class="metric-number" data-target="1">0</div><div class="metric-unit">hour</div>
-                    <div class="metric-label">Average approval time for inpatient requests.</div>
-                </div>
-				<!--<div class="metric-item">
-                    <div class="metric-label">Average approval time; 15 min for outpatient and 1 hour for inpatient requests.</div>
-                </div>-->
-                <div class="metric-item">
-				<div class="metric-number" data-target="5">0</div><div class="metric-unit">working days</div>
-                    <div class="metric-label">Special reimbursement cycle.</div>
-                </div>
-				<div >
-     
-                </div>
-				
-            </div>
+	<section id="metrics" class="metrics-section">
+  <div class="container">
+    <h2>{HomeData.Title2}</h2>
+
+    <div class="metrics-grid">
+
+      <!-- Beneficiaries -->
+      <div class="metric-item">
+        <div
+          class="metric-number"
+          data-target={extractNumber(HomeData.BeneficiariesServedNationwide.KeyNumber)}
+          data-addPlus="true"
+        >
+          0
         </div>
-    </section>	
+        <div class="metric-label">
+          {HomeData.BeneficiariesServedNationwide.KeyText}
+        </div>
+      </div>
+
+      <!-- Annual claims -->
+      <div class="metric-item">
+        <div
+          class="metric-number"
+          data-target={extractNumber(HomeData.AnnualClaimsPaymenRate.KeyNumber)}
+          data-addPlus="true"
+        >
+          0
+        </div>
+        <div class="metric-unit">million</div>
+        <div class="metric-label">
+          {HomeData.AnnualClaimsPaymenRate.KeyText}
+        </div>
+      </div>
+
+      <!-- Providers -->
+      <div class="metric-item">
+        <div
+          class="metric-number"
+          data-target={extractNumber(HomeData.ProvidersAcrossEgypt.KeyNumber)}
+          data-addPlus="true"
+        >
+          0
+        </div>
+        <div class="metric-label">
+          {HomeData.ProvidersAcrossEgypt.KeyText}
+        </div>
+      </div>
+
+      <!-- Clients -->
+      <div class="metric-item">
+        <div
+          class="metric-number"
+          data-target={extractNumber(HomeData.ClientsCompanies.KeyNumber)}
+          data-addPlus="true"
+        >
+          0
+        </div>
+        <div class="metric-label">
+          {HomeData.ClientsCompanies.KeyText}
+        </div>
+      </div>
+
+      <!-- Insurers -->
+      <div class="metric-item">
+        <div
+          class="metric-number"
+          data-target={extractNumber(HomeData.InsurerPayer.KeyNumber)}
+          data-addPlus="true"
+        >
+          0
+        </div>
+        <div class="metric-label">
+          {HomeData.InsurerPayer.KeyText}
+        </div>
+      </div>
+
+      <!-- 100% online -->
+      <div class="metric-item">
+        <div
+          class="metric-number"
+          data-target={extractNumber(HomeData.Online2ndPointOfServiceProviders.KeyNumber)}
+        >
+          0
+        </div>
+        <div class="metric-unit">%</div>
+        <div class="metric-label">
+          {HomeData.Online2ndPointOfServiceProviders.KeyText}
+        </div>
+      </div>
+
+      <!-- E-card -->
+      <div class="metric-item">
+        <div
+          class="metric-number"
+          data-target={extractNumber(HomeData.EcardServicesAvailability.KeyNumber)}
+        >
+          0
+        </div>
+        <div class="metric-unit">%</div>
+        <div class="metric-label">
+          {HomeData.EcardServicesAvailability.KeyText}
+        </div>
+      </div>
+
+      <!-- E-claim -->
+      <div class="metric-item">
+        <div
+          class="metric-number"
+          data-target={extractNumber(HomeData.EclaimServicesAvailabilityPaperlessServices.KeyNumber)}
+        >
+          0
+        </div>
+        <div class="metric-unit">%</div>
+        <div class="metric-label">
+          {HomeData.EclaimServicesAvailabilityPaperlessServices.KeyText}
+        </div>
+      </div>
+
+      <!-- 24/7 -->
+      <div class="metric-item">
+        <div
+          class="metric-number"
+          data-target={extractNumber(HomeData.ApprovalsAndCallCenteSupport.KeyNumber)}
+        >
+          0
+        </div>
+        <div class="metric-unit">/7</div>
+        <div class="metric-label">
+          {HomeData.ApprovalsAndCallCenteSupport.KeyText}
+        </div>
+      </div>
+
+      <!-- Outpatient -->
+      <div class="metric-item">
+        <div
+          class="metric-number"
+          data-target={extractNumber(HomeData.AverageApprovalTimeForOutpatient.KeyNumber)}
+        >
+          0
+        </div>
+        <div class="metric-unit">min</div>
+        <div class="metric-label">
+          {HomeData.AverageApprovalTimeForOutpatient.KeyText}
+        </div>
+      </div>
+
+      <!-- Inpatient -->
+      <div class="metric-item">
+        <div
+          class="metric-number"
+          data-target={extractNumber(HomeData.AverageApprovalTimeForInpatientRequests.KeyNumber)}
+        >
+          0
+        </div>
+        <div class="metric-unit">hour</div>
+        <div class="metric-label">
+          {HomeData.AverageApprovalTimeForInpatientRequests.KeyText}
+        </div>
+      </div>
+
+      <!-- Reimbursement -->
+      <div class="metric-item">
+        <div
+          class="metric-number"
+          data-target={extractNumber(HomeData.SpecialReimbursementCycle.KeyNumber)}
+        >
+          0
+        </div>
+        <div class="metric-unit">working days</div>
+        <div class="metric-label">
+          {HomeData.SpecialReimbursementCycle.KeyText}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 					
         <!-- Key Metrics Section -->
         <!-- <section class="metrics-section" id="metrics">
