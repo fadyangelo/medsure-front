@@ -1,0 +1,240 @@
+---
+import MyFooter from '../components/MyFooter.astro';
+---
+<!DOCTYPE html>
+<html lang="en" class="page-technology">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedSure - Medical Insurance Services</title>
+    <meta name="description" content="Comprehensive medical insurance solutions designed to protect you and your family. Experience peace of mind with MedSure's trusted healthcare coverage.">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/contact.css">
+    <link rel="stylesheet" href="/css/services.css">
+    <link rel="stylesheet" href="/css/counter.css">
+    <link rel="stylesheet" href="/css/technology.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+	<!--<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232563eb'><path d='M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z'/></svg>">-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+</head>
+<body>
+        <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <img src="/images/logo_icon.png" alt="MedSure Logo" class="logo-img">
+                    </div>
+                    <!--<div class="logo-text">
+                        <h1>MedSure</h1>
+                        <p>Medical Services</p>
+                    </div> -->
+                </div>
+
+                <nav class="nav-desktop">
+					<a href="/">Home</a>
+					<a href="/beneficiaries">Beneficiaries</a>
+					<a href="/medical-network">Medical network</a>
+					<a href="/technology" class="active">Technology & Innovation</a>
+					<a href="/about">About Us</a>
+					<a href="/services">Services</a>
+                    <a href="/contact">Contact us</a>
+                </nav>
+
+                <div class="header-buttons">
+                    <!-- <button class="btn btn-outline">Find a Provider</button> 
+					<button class="btn btn-medical">Submit a Claim</button>-->
+					<a href="/medical-network" class="btn btn-outline">Find a Provider</a>
+					<a href="/submit-claim" class="btn btn-medical">Submit a Claim</a>
+                </div>
+
+                <!-- Language Selector -->
+                <div class="lang-selector">
+                    <button class="lang-button" type="button" aria-haspopup="true" aria-expanded="false" onclick="toggleLangMenu(event)">
+                        <span class="current-lang-label">EN</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m6 9 6 6 6-6"/>
+                        </svg>
+                    </button>
+                    <div class="lang-menu hidden" role="menu">
+                        <button class="lang-option" role="menuitemradio" aria-checked="true" data-lang="en" onclick="setLanguage('en')">
+                            <span class="check">✓</span>
+                            <span>English</span>
+                        </button>
+                        <button class="lang-option" role="menuitemradio" aria-checked="false" data-lang="ar" onclick="setLanguage('ar')">
+                            <span class="check">✓</span>
+                            <span>العربية</span>
+                        </button>
+                    </div>
+                </div>
+
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="4" x2="20" y1="6" y2="6"/>
+                        <line x1="4" x2="20" y1="12" y2="12"/>
+                        <line x1="4" x2="20" y1="18" y2="18"/>
+                    </svg>
+                    <svg class="close-icon hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m18 6-12 12"/>
+                        <path d="m6 6 12 12"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="mobile-menu hidden">
+                <nav class="mobile-nav">
+                    <a href="/">Home</a>
+					<a href="/beneficiaries">Beneficiaries</a>
+					<a href="/medical-network">Medical network</a>
+					<a href="/technology" class="active">Technology & Innovation</a>
+					<a href="/about">About Us</a>
+					<a href="/services">Services</a>
+                    <a href="/contact">Contact us</a>
+                    <div class="mobile-buttons">
+					<!-- <button class="btn btn-outline">Find a Provider</button> 
+					<button class="btn btn-medical">Submit a Claim</button>-->
+					<a href="/medical-network" class="btn btn-outline">Find a Provider</a>
+					<a href="/submit-claim" class="btn btn-medical">Submit a Claim</a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="technology-hero">
+            <div class="container">
+                <h1>Technology & Innovation</h1>
+                <p>Leveraging cutting-edge technology to provide seamless healthcare management solutions for our members.</p>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="features-container">
+                <div class="section-header">
+                    <h2>How We’re Different</h2>
+                    <!--<p>How We’re Different</p>-->
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Mobile app access (iOS/Android)</h3>
+                        <p>Quickly and easily submit your medical claims through our secure online portal or mobile app.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Real-time approval notifications</h3>
+                        <p>Locate nearby healthcare providers in our extensive network with just a few clicks.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3>Employer dashboard </h3>
+                        <p>Get quick pre-approvals for medical procedures through our mobile app, saving you time and hassle.</p>
+                    </div>
+                    
+                    <!--<div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h3>Health & Wellness</h3>
+                        <p>Access valuable health advice, wellness tips, and track your medical history all in one place.</p>
+                    </div>-->
+                </div>
+            </div>
+        </section>
+
+	<!-- App Download Section -->
+    <section class="app-download-section">
+        <div class="container app-download-container">
+            <div class="app-download-content">
+                <h2>Get the MedSure App</h2>
+                <p>Manage your benefits, approvals, claims, and find providers on the go.</p>
+                <div class="store-buttons">
+                    <a class="store-btn google" href="#" target="_blank" rel="noopener" aria-label="Get it on Google Play">
+                        <i class="fab fa-google-play"></i>
+                        <span>
+                            <small>GET IT ON</small>
+                            Google Play
+                        </span>
+                    </a>
+                    <a class="store-btn apple" href="#" target="_blank" rel="noopener" aria-label="Download on the App Store">
+                        <i class="fab fa-apple"></i>
+                        <span>
+                            <small>Download on the</small>
+                            App Store
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="app-visual">
+                <div class="phone-mockup"></div>
+            </div>
+        </div>
+    </section>
+        <!-- App Showcase Section -->
+        <!-- <section class="app-showcase">
+            <div class="app-container">
+                <div class="app-content">
+                    <h2>Download Our Mobile App</h2>
+                    <p>Access your healthcare benefits anytime, anywhere with our user-friendly mobile application.</p>
+                    
+                    <div class="app-features">
+                        <div class="app-feature">
+                            <i class="fas fa-check"></i>
+                            <div>
+                                <h4>Submit claims on the go</h4>
+                                <p>Snap a photo of your receipt and submit claims in seconds</p>
+                            </div>
+                        </div>
+                        <div class="app-feature">
+                            <i class="fas fa-check"></i>
+                            <div>
+                                <h4>Find network providers</h4>
+                                <p>Search by specialty, location, or name</p>
+                            </div>
+                        </div>
+                        <div class="app-feature">
+                            <i class="fas fa-check"></i>
+                            <div>
+                                <h4>Track claims status</h4>
+                                <p>Real-time updates on your claims processing</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="download-buttons">
+                        <a href="#" class="download-btn">
+                            <i class="fab fa-apple"></i> Download on the App Store
+                        </a>
+                        <a href="#" class="download-btn">
+                            <i class="fab fa-google-play"></i> Get it on Google Play
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="app-screenshot">
+                    <img src="/images/app-screenshot.png" alt="MedSure Mobile App">
+                </div>
+            </div>
+        </section>-->
+    </main>
+
+    <!-- Footer -->
+    <MyFooter />
+
+    <script is:inline src="/js/main.js"></script>
+	<script is:inline src="/js/counter.js"></script>
+</body>
+</html>

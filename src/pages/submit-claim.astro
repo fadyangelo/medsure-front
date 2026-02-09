@@ -1,0 +1,308 @@
+---
+import MyFooter from '../components/MyFooter.astro';
+---
+<!DOCTYPE html>
+<html lang="en" class="submit-claim">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedSure - Medical Insurance Services</title>
+    <meta name="description" content="Comprehensive medical insurance solutions designed to protect you and your family. Experience peace of mind with MedSure's trusted healthcare coverage.">
+    <link rel="stylesheet" href="/fonts/cairo/stylesheet.css">
+	<link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/contact.css">
+    <link rel="stylesheet" href="/css/services.css">
+    <link rel="stylesheet" href="/css/counter.css">
+    <link rel="stylesheet" href="/css/claims.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+	<!--<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232563eb'><path d='M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z'/></svg>">-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="headermain">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <img src="/images/logo_icon.png" alt="MedSure Logo" class="logo-img">
+                    </div>
+                    <!--<div class="logo-text">
+                        <h1>MedSure</h1>
+                        <p>Medical Services</p>
+                    </div> -->
+                </div>
+
+                <nav class="nav-desktop">
+                    <a href="/" data-i18n="nav.home">Home</a> | 
+                    <a href="/services" data-i18n="nav.services">Services</a>  | 
+                    <a href="/beneficiaries" data-i18n="nav.beneficiaries">Beneficiaries</a>  | 
+                    <a href="/medical-network" data-i18n="nav.medical_network">Medical network</a>  | 
+                    <!--<a href="/technology">Technology & Innovation</a>-->
+                    <a href="/about" data-i18n="nav.about">About Us</a>  | 
+                    <a href="/contact" data-i18n="nav.contact">Contact us</a>
+                </nav>
+
+                <div class="header-buttons">
+                    <!-- <button class="btn btn-outline">Find a Provider</button> 
+					<button class="btn btn-medical">Submit a Claim</button>-->
+
+					<a href="/medical-network" data-i18n="nav.find_provider" class="btn btn-medical">Find a Provider</a>
+					
+					<!--<a href="/medical-network" class="btn btn-outline">Find a Provider</a>
+					<a href="/submit-claim" class="btn btn-medical">Submit a Claim</a>-->
+                </div>
+
+                <!-- Language Selector -->
+                <div class="lang-selector">
+				
+				
+                    <button class="lang-button" type="button" aria-haspopup="true" aria-expanded="false" onclick="toggleLangMenu(event)">
+                        <span class="current-lang-label">EN</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m6 9 6 6 6-6"/>
+                        </svg>
+                    </button>
+                    <div class="lang-menu hidden" role="menu">
+                        <button class="lang-option" role="menuitemradio" aria-checked="true" data-lang="en" onclick="setLanguage('en')">
+                            <span class="check">✓</span>
+                            <span>English</span>
+                        </button>
+                        <button class="lang-option" role="menuitemradio" aria-checked="false" data-lang="ar" onclick="setLanguage('ar')">
+                            <span class="check">✓</span>
+                            <span>العربية</span>
+                        </button>
+                    </div>
+                </div>
+
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="4" x2="20" y1="6" y2="6"/>
+                        <line x1="4" x2="20" y1="12" y2="12"/>
+                        <line x1="4" x2="20" y1="18" y2="18"/>
+                    </svg>
+                    <svg class="close-icon hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m18 6-12 12"/>
+                        <path d="m6 6 12 12"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="mobile-menu hidden">
+                <nav class="mobile-nav">
+				    <a href="/" data-i18n="nav.home">Home</a>
+                    <a href="/services" data-i18n="nav.services">Services</a>
+                    <a href="/beneficiaries" data-i18n="nav.beneficiaries">Beneficiaries</a> 
+                    <a href="/medical-network" data-i18n="nav.medical_network">Medical network</a> 
+                    <!--<a href="/technology">Technology & Innovation</a>-->
+                    <a href="/about" data-i18n="nav.about">About Us</a> 
+                    <a href="/contact" data-i18n="nav.contact">Contact us</a>
+
+                    <div class="mobile-buttons">
+					<!-- <button class="btn btn-outline">Find a Provider</button> 
+					<button class="btn btn-medical">Submit a Claim</button>-->
+					
+					<a href="/medical-network" data-i18n="nav.find_provider" class="btn btn-medical">Find a Provider</a>
+					
+					<!-- <a href="/medical-network" class="btn btn-outline">Find a Provider</a>
+					<a href="/submit-claim" class="btn btn-medical">Submit a Claim</a> -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="claims-hero">
+            <div class="container">
+                <h1>Submit a Claim</h1>
+                <p>File your medical insurance claim quickly and securely with our easy-to-use online form.</p>
+            </div>
+        </section>
+
+        <!-- Claims Section -->
+        <section class="claims-section">
+            <div class="claims-container">
+                <div class="claims-info">
+                    <h2>How to Submit Your Claim</h2>
+                    <p>Follow these simple steps to submit your medical claim. Make sure you have all the required documents ready before starting the process.</p>
+                    
+                    <div class="info-box">
+                        <h3><i class="fas fa-info-circle"></i> What You'll Need</h3>
+                        <p>• Original medical reports and bills<br>
+                        • Prescription copies<br>
+                        • Doctor's referral (if applicable)<br>
+                        • Any other supporting documents</p>
+                    </div>
+                    
+                    <div class="info-box">
+                        <h3><i class="fas fa-clock"></i> Processing Time</h3>
+                        <p>Most claims are processed within 5-7 business days. You'll receive a confirmation email once your claim is received and updates throughout the process.</p>
+                    </div>
+                    
+                    <div class="contact-support">
+                        <h3>Need Help?</h3>
+                        <p>Our support team is here to assist you with your claim submission.</p>
+                        <a href="tel:+201234567890" class="contact-link">
+                            <i class="fas fa-phone"></i> +20 123 456 7890
+                        </a>
+                        <a href="mailto:claims@medsure.com.eg" class="contact-link">
+                            <i class="fas fa-envelope"></i> claims@medsure.com.eg
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="claim-form">
+                    <div class="form-header">
+                        <h2>Claim Submission Form</h2>
+                        <p>Please fill in all required fields (*)</p>
+                    </div>
+                    
+                    <form id="claim-submission-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="policy-number">Policy Number *</label>
+                                <input type="text" id="policy-number" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="member-id">Member ID *</label>
+                                <input type="text" id="member-id" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="first-name">First Name *</label>
+                                <input type="text" id="first-name" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="last-name">Last Name *</label>
+                                <input type="text" id="last-name" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="claim-type">Type of Claim *</label>
+                                <select id="claim-type" class="form-control" required>
+                                    <option value="">Select claim type</option>
+                                    <option value="inpatient">Inpatient Treatment</option>
+                                    <option value="outpatient">Outpatient Treatment</option>
+                                    <option value="dental">Dental Treatment</option>
+                                    <option value="optical">Optical Treatment</option>
+                                    <option value="maternity">Maternity</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="treatment-date">Treatment Date *</label>
+                                <input type="date" id="treatment-date" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="provider-name">Healthcare Provider Name *</label>
+                                <input type="text" id="provider-name" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="diagnosis">Diagnosis / Treatment Description *</label>
+                                <textarea id="diagnosis" class="form-control" required></textarea>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label>Upload Supporting Documents *</label>
+                                <div class="file-upload" onclick="document.getElementById('file-upload').click()">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>Click to upload or drag and drop</p>
+                                    <p>PDF, JPG, or PNG (max. 10MB)</p>
+                                    <input type="file" id="file-upload" multiple style="display: none;">
+                                </div>
+                                <div id="file-names"></div>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="additional-notes">Additional Notes</label>
+                                <textarea id="additional-notes" class="form-control" placeholder="Any additional information about your claim..."></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="terms" required>
+                                <label for="terms">I certify that all information provided is accurate and complete to the best of my knowledge. I understand that providing false information may result in claim denial.</label>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit-claim">
+                            <i class="fas fa-paper-plane"></i> Submit Claim
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <MyFooter />
+
+    <script is:inline src="/js/main.js"></script>
+    <script is:inline>
+        // File upload handling
+        document.getElementById('file-upload').addEventListener('change', function(e) {
+            const fileNames = document.getElementById('file-names');
+            fileNames.innerHTML = '';
+            
+            if (this.files.length > 0) {
+                const list = document.createElement('ul');
+                list.style.listStyle = 'none';
+                list.style.padding = '0';
+                list.style.marginTop = '10px';
+                
+                for (let i = 0; i < this.files.length; i++) {
+                    const item = document.createElement('li');
+                    item.style.display = 'flex';
+                    item.style.alignItems = 'center';
+                    item.style.gap = '8px';
+                    item.style.marginBottom = '5px';
+                    item.style.fontSize = '0.9rem';
+                    item.style.color = '#2196f3';
+                    
+                    const icon = document.createElement('i');
+                    icon.className = 'fas fa-file-alt';
+                    
+                    const text = document.createTextNode(this.files[i].name);
+                    
+                    item.appendChild(icon);
+                    item.appendChild(text);
+                    list.appendChild(item);
+                }
+                
+                fileNames.appendChild(list);
+            }
+        });
+        
+        // Form submission
+        document.getElementById('claim-submission-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add form submission logic here
+            alert('Your claim has been submitted successfully! We will review it and get back to you soon.');
+            this.reset();
+            document.getElementById('file-names').innerHTML = '';
+        });
+    </script>
+	<!-- In the head section, add this before main.js -->
+	<script is:inline src="/js/translations.js"></script>
+	<script is:inline src="/js/counter.js"></script>
+</body>
+</html>

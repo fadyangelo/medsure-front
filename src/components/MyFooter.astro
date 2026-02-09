@@ -1,0 +1,233 @@
+---
+import { STRAPI_URL } from 'astro:env/server';
+// 1. Get the object
+const cookie = Astro.cookies.get('site_lang');
+const lang = cookie?.value ;//|| 'en';
+
+// 2. Map 'ar' to 'ar-EG' if your Strapi uses specific region codes
+const strapiLocale = lang === 'ar' ? 'ar-EG' : 'en';
+
+// 3. Construct the Dynamic Path
+// Note: We use &populate=* to ensure images/relations are returned
+// const STRAPI_URL2 = "http://localhost:1337"; // Or process.env.STRAPI_URL
+const sPath = `${STRAPI_URL}/api/global?locale=${strapiLocale}&populate=*`;
+
+
+
+//const sPath = `${STRAPI_URL}/api/global`;
+
+
+type Footer ={
+   id: number,
+   documentId: string,
+   FacebookURL: string,
+	InstagarmURL: string,
+ 	LinkedInURL: string,
+	XURL: string,
+	FooterDescription: string,
+	Footer_Phone1: string,
+  Footer_Phone2: string,
+ 	Footer_Email1: string,
+	Footer_Email2: string,
+	Footer_Address: string,
+  WhatsappNumber: string
+}
+
+async function getFooterDataTree(){
+  const response = await fetch(sPath);
+  const data = await response.json();
+  console.dir(data,{depth: null});
+  return data;
+}
+
+async function getFooterData(){
+  const response = await fetch(sPath);
+  const data = await response.json() ;
+  return data.data as Footer; // extract the array
+}
+
+const globalData: Footer = await getFooterData();
+
+
+// // Helper function to read the cookie
+// function getCookie(name) {
+//   const value = `; ${document.cookie}`;
+//   const parts = value.split(`; ${name}=`);
+//   if (parts.length === 2) return parts.pop().split(';').shift();
+//   return null;
+// }
+
+
+// function getCookie(name) {
+//   // Split cookie string and get all individual name=value pairs
+//   const value = `; ${document.cookie}`;
+//   const parts = value.split(`; ${name}=`);
+  
+//   // If the cookie exists, return the value
+//   if (parts.length === 2) {
+//     return parts.pop().split(';').shift();
+//   }
+//   return null; // Cookie not found
+// }
+
+// Usage:
+
+
+// // 1. Get the object
+// const currentLang = Astro.cookies.get('site_lang')?.value || 'AA';
+// // const cookieObj = Astro.cookies.get('site_lang');
+
+// // 2. Get the actual string value (use ?.value because it might be undefined)
+// // const currentLang = cookieObj?.value || 'en';
+
+// //const currentLang = getCookie('site_lang') || 'en'; // Default to 'en' if missing
+// console.log(currentLang);
+
+
+// // // 1. Get the language from the Cookie (defaults to 'en')
+// const cookie = Astro.cookies.get('site_lang');
+// const lang = cookie?.value ;//|| 'en';
+
+// // 2. Map 'ar' to 'ar-EG' if your Strapi uses specific region codes
+// const strapiLocale = lang === 'ar' ? 'ar-EG' : 'en';
+
+// // 3. Construct the Dynamic Path
+// // Note: We use &populate=* to ensure images/relations are returned
+// const STRAPI_URL2 = "http://localhost:1337"; // Or process.env.STRAPI_URL
+// const sPath2 = `${STRAPI_URL2}/api/global?locale=${strapiLocale}&populate=*`;
+
+
+---
+
+<!-- <h1 id="title">Default Text</h1>
+<script is:inline>
+  // This runs only after the page loads in the browser
+  const lang = localStorage.getItem('site_lang') || 'en';
+  
+  // Update the DOM
+  const titleElement = document.getElementById('title');
+  titleElement.innerText = "Language is: " + lang;
+</script> -->
+
+ <!-- <pre>++{JSON.stringify(sPath)}++</pre> -->
+  
+  <!-- <pre>{JSON.stringify(globalData.FacebookURL)}</pre> -->
+  <!-- <pre>{JSON.stringify(globalData)}</pre> -->
+
+  <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-logo">
+                        <img src="/images/logo_icon.png" alt="MedSure Logo" class="footer-logo-img">
+                        <div class="footer-logo-text">
+                            <h3>MedSure</h3>
+                            <p>Medical Insurance Services</p>
+                        </div>
+                    </div>
+                    { globalData.FooterDescription != null && globalData.FooterDescription.length>0 && 
+                    <p class="footer-description">{globalData.FooterDescription}</p>
+                    } 
+
+                    <div class="footer-contact">
+                        <div class="contact-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+							<span class="footerLink">
+                { globalData.Footer_Phone1 != null && globalData.Footer_Phone1.length>0 && <a href={"tel:"+globalData.Footer_Phone1}>{globalData.Footer_Phone1}</a>     } 
+                { globalData.Footer_Phone2 != null && globalData.Footer_Phone2.length>0 && <span> | </span><a href={"tel:"+globalData.Footer_Phone2}>{globalData.Footer_Phone2}</a>                }
+                </span>
+                        </div>
+                        <div class="contact-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                            <span class="footerLink">
+                {globalData.Footer_Email1 != null && globalData.Footer_Email1.length>0 && <a class="footerLink" href={"mailto:"+globalData.Footer_Email1}>{globalData.Footer_Email1}</a>    }
+               
+                
+                {
+                  globalData.Footer_Email2 != null && globalData.Footer_Email2.length>0 && 
+
+                <span> | </span><a class="footerLink" href={"mailto:"+globalData.Footer_Email2}>{globalData.Footer_Email2}</a>
+                }
+
+              </span>
+                        </div>
+                        {globalData.Footer_Address != null && globalData.Footer_Address.length>0 && 
+                        <div class="contact-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                          <span>{globalData.Footer_Address} </span>
+                        </div>
+                        }
+                    </div>
+
+                    <div class="footer-social">
+                        
+                      {globalData.FacebookURL != null && globalData.FacebookURL.length>0 && 
+                      <a href={globalData.FacebookURL} target="_blank" aria-label="Facebook" rel="noopener">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        }
+                      
+                      {globalData.LinkedInURL != null && globalData.LinkedInURL.length>0 && 
+                      <a href={globalData.LinkedInURL} target="_blank" aria-label="LinkedIn" rel="noopener">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        }
+
+                        {globalData.InstagarmURL != null && globalData.InstagarmURL.length>0 && 
+                      <a href={globalData.InstagarmURL} target="_blank" aria-label="Instagram" rel="noopener">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        }
+
+                        {globalData.XURL != null && globalData.XURL.length>0 && 
+                      <a href={globalData.XURL} target="_blank" aria-label="X" rel="noopener">
+                           <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+                        }
+                    </div>
+                </div>
+
+			<div class="footer-links">
+                <h4 data-i18n="footer_nav.Services">Services</h4>
+                    <ul>
+                        <li><a href="/services" data-i18n="nav.services">Services</a></li>
+                        <li><a href="/beneficiaries" data-i18n="nav.beneficiaries">Beneficiaries</a></li>
+                        <li><a href="/resources" data-i18n="nav.resources">Resources</a></li>
+                        <li><a href="/medical-network" data-i18n="nav.medical_network">Medical network</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4 data-i18n="footer_nav.QuickLinks">Quick Links</h4>
+                    <ul>
+                        <li><a href="/about" data-i18n="nav.about">About Us</a></li>
+                        <li><a href="/careers" data-i18n="nav.careers">Careers</a></li>
+						            <li><a href="/contact" data-i18n="nav.contact">Contact us</a></li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+
+            <div class="footer-bottom">
+				<p>&copy; <script is:inline>document.write(new Date().getFullYear())</script> <span data-i18n="footer_nav.AllRigahtsReserved">MedSure Medical Services. All rights reserved.</span></p>
+				<p style="font-size:12px;text-align:center">Developed by <a style="color:#a7d3fb;" href="https://itspark-eg.com" target="_blank">ITSpark</a></p>
+            </div>
+        </div>
+    </footer>
+
+
+    {globalData.WhatsappNumber != null && globalData.WhatsappNumber.length>0 && 
+                      <a href={"https://wa.me/"+globalData.WhatsappNumber} class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    }
+    

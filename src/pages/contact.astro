@@ -1,0 +1,246 @@
+---
+import MyFooter from '../components/MyFooter.astro';
+---
+<!DOCTYPE html>
+<html lang="en" class="page-contact">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedSure - Medical Insurance Services</title>
+    <meta name="description" content="Comprehensive medical insurance solutions designed to protect you and your family. Experience peace of mind with MedSure's trusted healthcare coverage.">
+    <link rel="stylesheet" href="/fonts/cairo/stylesheet.css">
+	<link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/contact.css">
+	<link rel="stylesheet" href="/css/counter.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+	<!--<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232563eb'><path d='M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z'/></svg>">-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="headermain">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <img src="/images/logo_icon.png" alt="MedSure Logo" class="logo-img">
+                    </div>
+                    <!--<div class="logo-text">
+                        <h1>MedSure</h1>
+                        <p>Medical Services</p>
+                    </div> -->
+                </div>
+
+                <nav class="nav-desktop">
+                    <a href="/" data-i18n="nav.home">Home</a> | 
+                    <a href="/services" data-i18n="nav.services">Services</a>  | 
+                    <a href="/beneficiaries" data-i18n="nav.beneficiaries">Beneficiaries</a>  | 
+                    <a href="/medical-network" data-i18n="nav.medical_network">Medical network</a>  | 
+                    <!--<a href="/technology">Technology & Innovation</a>-->
+                    <a href="/about" data-i18n="nav.about">About Us</a>  | 
+                    <a href="/contact" class="active" data-i18n="nav.contact">Contact us</a>
+                </nav>
+
+                <div class="header-buttons">
+                    <!-- <button class="btn btn-outline">Find a Provider</button> 
+					<button class="btn btn-medical">Submit a Claim</button>-->
+
+					<a href="/medical-network" data-i18n="nav.find_provider" class="btn btn-medical">Find a Provider</a>
+					
+					<!--<a href="/medical-network" class="btn btn-outline">Find a Provider</a>
+					<a href="/submit-claim" class="btn btn-medical">Submit a Claim</a>-->
+                </div>
+
+                <!-- Language Selector -->
+                <div class="lang-selector">
+				
+				
+                    <button class="lang-button" type="button" aria-haspopup="true" aria-expanded="false" onclick="toggleLangMenu(event)">
+                        <span class="current-lang-label">EN</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m6 9 6 6 6-6"/>
+                        </svg>
+                    </button>
+                    <div class="lang-menu hidden" role="menu">
+                        <button class="lang-option" role="menuitemradio" aria-checked="true" data-lang="en" onclick="setLanguage('en')">
+                            <span class="check">✓</span>
+                            <span>English</span>
+                        </button>
+                        <button class="lang-option" role="menuitemradio" aria-checked="false" data-lang="ar" onclick="setLanguage('ar')">
+                            <span class="check">✓</span>
+                            <span>العربية</span>
+                        </button>
+                    </div>
+                </div>
+
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="4" x2="20" y1="6" y2="6"/>
+                        <line x1="4" x2="20" y1="12" y2="12"/>
+                        <line x1="4" x2="20" y1="18" y2="18"/>
+                    </svg>
+                    <svg class="close-icon hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m18 6-12 12"/>
+                        <path d="m6 6 12 12"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="mobile-menu hidden">
+                <nav class="mobile-nav">
+				    <a href="/" data-i18n="nav.home">Home</a>
+                    <a href="/services"data-i18n="nav.services">Services</a>
+                    <a href="/beneficiaries" data-i18n="nav.beneficiaries">Beneficiaries</a> 
+                    <a href="/medical-network" data-i18n="nav.medical_network">Medical network</a> 
+                    <!--<a href="/technology">Technology & Innovation</a>-->
+                    <a href="/about" data-i18n="nav.about">About Us</a> 
+                    <a href="/contact" class="active"  data-i18n="nav.contact">Contact us</a>
+
+                    <div class="mobile-buttons">
+					<!-- <button class="btn btn-outline">Find a Provider</button> 
+					<button class="btn btn-medical">Submit a Claim</button>-->
+					
+					<a href="/medical-network" data-i18n="nav.find_provider" class="btn btn-medical">Find a Provider</a>
+					
+					<!-- <a href="/medical-network" class="btn btn-outline">Find a Provider</a>
+					<a href="/submit-claim" class="btn btn-medical">Submit a Claim</a> -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="main-content">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1>Contact Us</h1>
+                <p>Get in touch with our team for any inquiries or support</p>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-wrapper">
+                    <!-- Contact Information -->
+                    <div class="contact-info">
+                        <h2>Get in Touch</h2>
+                        <p>Our team is here to assist you with any questions or concerns you may have. Reach out to us through any of the following channels:</p>
+                        
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h3>Phone</h3>
+									<p><a href="tel:17672">17672</a></p>
+									<p><a href="tel:0221277888">02-21277888</a></p>
+									
+                                    <!--<p><a href="tel:0221277888">02-21277888</a></p>
+                                    <p><a href="tel:01288621773">01288621773</a></p>
+                                    <p><a href="tel:01288621783">01288621783</a></p>-->
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h3>Email</h3>
+                                    <p><a href="mailto:info@medsure.com.eg">info@medsure.com.eg</a></p>
+                                    <p><a href="mailto:CS@medsure.com.eg">CS@medsure.com.eg</a></p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h3>Location</h3>
+                                    <p>15 El-Bostan St., Sheraton El-Matar,<br>Heliopolis, Cairo, Egypt</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <div class="contact-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h3>Working Hours</h3>
+                                    <p>Sunday - Thursday: 9:00 AM - 5:00 PM</p>
+                                    <p>Friday & Saturday: Closed</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Form -->
+                    <div class="contact-form-container">
+                        <h2>Send Us a Message</h2>
+                        <form id="contactForm" class="contact-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Full Name<span class="required">*</span></label>
+                                    <input type="text" id="name" name="name" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email <span class="required">*</span></label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="phone">Mobile<span class="required">*</span></label>
+                                    <input type="tel" id="phone" name="phone">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="message">Your Message <span class="required">*</span></label>
+                                    <textarea id="message" name="message" rows="5" required></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <button type="submit" class="Sendbtn btn-block">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Map Section -->
+                <div class="map-container">
+				<iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d110453.35152342729!2d31.283130651323674!3d30.103715188886557!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x1458179fc66cefdf%3A0xfe1b3885329ae110!2s8-17%20El-Bostan%2C%20Sheraton%20Al%20Matar%2C%20El%20Nozha%2C%20Cairo%20Governorate%204471120!3m2!1d30.1037252!2d31.365514299999997!5e0!3m2!1sen!2seg!4v1756736390123!5m2!1sen!2seg" 
+				width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"title="MedSure Location Map"></iframe>
+                    <!--<iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3452.587123218498!2d31.36701531511676!3d30.08009198187117!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583e4c3a1f8e8f%3A0x8c0b7c8f9c5c5c5c!2s15%20El-Bostan%20St.%2C%20Sheraton%20El-Matar%2C%20Heliopolis%2C%20Cairo%2C%20Egypt!5e0!3m2!1sen!2seg!4v1234567890123!5m2!1sen!2seg" 
+                        width="100%" 
+                        height="450" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy"
+                        title="MedSure Location Map">
+                    </iframe>-->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <MyFooter />
+    <!-- In the head section, add this before main.js -->
+	<script is:inline src="/js/translations.js"></script>
+	<script is:inline src="/js/main.js"></script>
+	<script is:inline src="/js/counter.js"></script>
+</body>
+</html>

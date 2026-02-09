@@ -1,0 +1,129 @@
+/* Claims Page Styles */
+.claims-hero {
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.9), rgba(13, 71, 161, 0.9));
+    color: white;
+    padding: 5rem 0;
+    text-align: center;
+    position: relative;
+}
+
+.claims-hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
+}
+
+.claims-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 2rem;
+}
+
+.claim-form {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-top: -50px;
+    position: relative;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #f8f9fa;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #2196f3;
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+    background-color: white;
+}
+
+.file-upload {
+    border: 2px dashed #ddd;
+    border-radius: 6px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.file-upload i {
+    font-size: 2rem;
+    color: #2196f3;
+    margin-bottom: 0.5rem;
+}
+
+.btn-submit-claim {
+    width: 100%;
+    padding: 0.75rem;
+    background: #2196f3;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-submit-claim:hover {
+    background: #1976d2;
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .claims-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .claim-form {
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .claims-hero h1 {
+        font-size: 2rem;
+    }
+}

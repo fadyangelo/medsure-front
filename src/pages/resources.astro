@@ -1,0 +1,280 @@
+---
+import MyFooter from '../components/MyFooter.astro';
+---
+<!DOCTYPE html>
+<html lang="en" class="page-resources">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedSure - Medical Insurance Services</title>
+    <meta name="description" content="Comprehensive medical insurance solutions designed to protect you and your family. Experience peace of mind with MedSure's trusted healthcare coverage.">
+    <link rel="stylesheet" href="/fonts/cairo/stylesheet.css">
+	<link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/contact.css">
+    <link rel="stylesheet" href="/css/services.css">
+    <link rel="stylesheet" href="/css/counter.css">
+    <link rel="stylesheet" href="/css/resources.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+	<!--<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232563eb'><path d='M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z'/></svg>">-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+</head>
+<body>
+ <!-- Header -->
+    <header class="header" id="headermain">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <img src="/images/logo_icon.png" alt="MedSure Logo" class="logo-img">
+                    </div>
+                    <!--<div class="logo-text">
+                        <h1>MedSure</h1>
+                        <p>Medical Services</p>
+                    </div> -->
+                </div>
+
+                <nav class="nav-desktop">
+                    <a href="/" data-i18n="nav.home">Home</a> | 
+                    <a href="/services" data-i18n="nav.services">Services</a>  | 
+                    <a href="/beneficiaries" data-i18n="nav.beneficiaries">Beneficiaries</a>  | 
+                    <a href="/medical-network" data-i18n="nav.medical_network">Medical network</a>  | 
+                    <!--<a href="/technology">Technology & Innovation</a>-->
+                    <a href="/about" data-i18n="nav.about">About Us</a>  | 
+                    <a href="/contact" data-i18n="nav.contact">Contact us</a>
+                </nav>
+
+                <div class="header-buttons">
+                    <!-- <button class="btn btn-outline">Find a Provider</button> 
+					<button class="btn btn-medical">Submit a Claim</button>-->
+
+					<a href="/medical-network" data-i18n="nav.find_provider" class="btn btn-medical">Find a Provider</a>
+					
+					<!--<a href="/medical-network" class="btn btn-outline">Find a Provider</a>
+					<a href="/submit-claim" class="btn btn-medical">Submit a Claim</a>-->
+                </div>
+
+                <!-- Language Selector -->
+                <div class="lang-selector">
+				
+				
+                    <button class="lang-button" type="button" aria-haspopup="true" aria-expanded="false" onclick="toggleLangMenu(event)">
+                        <span class="current-lang-label">EN</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m6 9 6 6 6-6"/>
+                        </svg>
+                    </button>
+                    <div class="lang-menu hidden" role="menu">
+                        <button class="lang-option" role="menuitemradio" aria-checked="true" data-lang="en" onclick="setLanguage('en')">
+                            <span class="check">✓</span>
+                            <span>English</span>
+                        </button>
+                        <button class="lang-option" role="menuitemradio" aria-checked="false" data-lang="ar" onclick="setLanguage('ar')">
+                            <span class="check">✓</span>
+                            <span>العربية</span>
+                        </button>
+                    </div>
+                </div>
+
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="4" x2="20" y1="6" y2="6"/>
+                        <line x1="4" x2="20" y1="12" y2="12"/>
+                        <line x1="4" x2="20" y1="18" y2="18"/>
+                    </svg>
+                    <svg class="close-icon hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m18 6-12 12"/>
+                        <path d="m6 6 12 12"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="mobile-menu hidden">
+                <nav class="mobile-nav">
+				    <a href="/" data-i18n="nav.home">Home</a>
+                    <a href="/services" data-i18n="nav.services">Services</a>
+                    <a href="/beneficiaries" data-i18n="nav.beneficiaries">Beneficiaries</a> 
+                    <a href="/medical-network" data-i18n="nav.medical_network">Medical network</a> 
+                    <!--<a href="/technology">Technology & Innovation</a>-->
+                    <a href="/about" data-i18n="nav.about">About Us</a> 
+                    <a href="/contact" data-i18n="nav.contact">Contact us</a>
+
+                    <div class="mobile-buttons">
+					<!-- <button class="btn btn-outline">Find a Provider</button> 
+					<button class="btn btn-medical">Submit a Claim</button>-->
+					
+					<a href="/medical-network" data-i18n="nav.find_provider" class="btn btn-medical">Find a Provider</a>
+					
+					<!-- <a href="/medical-network" class="btn btn-outline">Find a Provider</a>
+					<a href="/submit-claim" class="btn btn-medical">Submit a Claim</a> -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="resources-hero">
+            <div class="container">
+                <h1>Resources</h1>
+                <p>Access important documents, forms, and helpful information to make the most of your MedSure experience.</p>
+            </div>
+        </section>
+
+        <!-- Resources Grid -->
+        <section class="resources-section">
+            <div class="resources-container">
+                <div class="section-header">
+                    <h2>Documents & Forms</h2>
+                    <p>Download important resources for your healthcare needs</p>
+                </div>
+                
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon">📎</div>
+                        <h3>Corporate Profile</h3>
+                        <p>Learn more about MedSure, our mission, and our commitment to healthcare excellence.</p>
+                        <a href="/docs/MedSure corporate profile.pdf" target="_blank" class="download-btn">
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-icon">📎</div>
+                        <h3>Network List</h3>
+                        <p>Access our comprehensive directory of healthcare providers in our network.</p>
+                        <div class="download-links">
+							<a href="/docs/MedSure Network_A_Plus_Plus.xlsx" class="download-btn">
+								<i class="fas fa-download"></i> A++
+							</a>
+							<a href="/docs/MedSure Network_A_Plus.xlsx" class="download-btn">
+								<i class="fas fa-download"></i> A+
+							</a>
+							<a href="/docs/MedSure Network_A.xlsx" class="download-btn">
+								<i class="fas fa-download"></i> A 
+							</a>
+						</div>
+                    </div>
+                    
+                    <!--<div class="resource-card">
+                        <div class="resource-icon">📎</div>
+                        <h3>Reimbursement Form</h3>
+                        <p>Submit your medical expense claims for reimbursement with our easy-to-use form.</p>
+                        <a href="#" class="download-btn">
+                            <i class="fas fa-download"></i> Download Form
+                        </a>
+                    </div>-->
+                    
+                    <div class="resource-card">
+                        <div class="resource-icon">📎</div>
+                        <h3>Satisfaction Survey</h3>
+                        <p>Share your feedback to help us improve our services.</p>
+                        <a href="/docs/MedSure Client Satisfaction Survey.pdf" class="download-btn">
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+						
+						<!--<a href="#" class="download-btn">
+                            <i class="fas fa-clipboard-check"></i> Take Survey
+                        </a>-->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Section -->
+        <section class="video-section">
+            <div class="video-container">
+                <div class="section-header">
+                    <h2>How to Use MedSure Services</h2>
+                    <p>Watch our tutorial video to learn how to make the most of your MedSure benefits</p>
+                </div>
+                <div class="video-wrapper">
+                    <!-- Replace with your actual video embed code -->
+                    <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <!--<section class="blog-section">
+            <div class="blog-container">
+                <div class="section-header">
+                    <h2>Blog & FRA Updates</h2>
+                    <p>Stay informed with the latest healthcare news and updates</p>
+                </div>
+                
+                <div class="blog-grid">
+                    <div class="blog-card">
+                        <img src="https://media.istockphoto.com/id/1346675527/photo/medical-science-laboratory-portrait-of-beautiful-black-scientist-looking-under-microscope.jpg?s=1024x1024&w=is&k=20&c=Q6PN-EmvU-xCP6Ky5mPoppAaoOheCdFOLmrwklaO5SI=" alt="Healthcare Tips" class="blog-image">
+                        <div class="blog-content">
+                            <div class="blog-date">SEPTEMBER 1, 2025</div>
+                            <h3>5 Ways to Maximize Your Health Insurance Benefits</h3>
+                            <p class="blog-excerpt">Learn how to make the most of your healthcare coverage with these expert tips.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="blog-card">
+                        <img src="https://media.istockphoto.com/id/1374389013/photo/genetic-research-and-biotech-science-concept.jpg?s=1024x1024&w=is&k=20&c=Pjkxj_GkP6HMAAl1xXNIA3AekZQGYEjUs9TulaYxeX4=" alt="FRA Updates" class="blog-image">
+                        <div class="blog-content">
+                            <div class="blog-date">AUGUST 25, 2025</div>
+                            <h3>Understanding the Latest FRA Healthcare Regulations</h3>
+                            <p class="blog-excerpt">Stay compliant with the most recent updates from the Financial Regulatory Authority.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="blog-card">
+                        <img src="https://media.istockphoto.com/id/2036497686/photo/science-teamwork-and-scientist-with-tablet-in-laboratory-for-communication-pharmaceutical.jpg?s=1024x1024&w=is&k=20&c=BFMLCwlgeIJC0cLA8J4xjRLwvEMftHXoF0P8XZoyPus=" alt="Wellness" class="blog-image">
+                        <div class="blog-content">
+                            <div class="blog-date">AUGUST 15, 2025</div>
+                            <h3>Wellness in the Workplace: A Guide for Employers</h3>
+                            <p class="blog-excerpt">Discover how to implement effective workplace wellness programs for your team.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>-->
+    </main>
+
+    <!-- App Download Section -->
+    <section class="app-download-section">
+        <div class="container app-download-container">
+            <div class="app-download-content">
+                <h2>Get the MedSure App</h2>
+                <p>Manage your benefits, approvals, claims, and find providers on the go.</p>
+                <div class="store-buttons">
+                    <a class="store-btn google" href="#" target="_blank" rel="noopener" aria-label="Get it on Google Play">
+                        <i class="fab fa-google-play"></i>
+                        <span>
+                            <small>GET IT ON</small>
+                            Google Play
+                        </span>
+                    </a>
+                    <a class="store-btn apple" href="#" target="_blank" rel="noopener" aria-label="Download on the App Store">
+                        <i class="fab fa-apple"></i>
+                        <span>
+                            <small>Download on the</small>
+                            App Store
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="app-visual">
+                <div class="phone-mockup">
+				<img src="/images/MobileApp.jpg" alt="MedSure Mobile App" class="MobileApp-image">
+				</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <MyFooter />
+    <!-- In the head section, add this before main.js -->
+	<script is:inline src="/js/translations.js"></script>
+	<script is:inline src="/js/main.js"></script>
+	<script is:inline src="/js/counter.js"></script>
+</body>
+</html>

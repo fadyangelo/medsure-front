@@ -1,0 +1,342 @@
+---
+import MyFooter from '../components/MyFooter.astro';
+---
+<!DOCTYPE html>
+<html lang="en" class="page-about">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedSure - Medical Insurance Services</title>
+    <meta name="description" content="Comprehensive medical insurance solutions designed to protect you and your family. Experience peace of mind with MedSure's trusted healthcare coverage.">
+    <link rel="stylesheet" href="/fonts/cairo/stylesheet.css">
+	<link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/contact.css">
+    <link rel="stylesheet" href="/css/services.css">
+    <link rel="stylesheet" href="/css/counter.css">
+    <link rel="stylesheet" href="/css/about.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+	<!--<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232563eb'><path d='M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z'/></svg>">-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+</head>
+<body>
+   <!-- Header -->
+    <header class="header" id="headermain">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <img src="/images/logo_icon.png" alt="MedSure Logo" class="logo-img">
+                    </div>
+                    <!--<div class="logo-text">
+                        <h1>MedSure</h1>
+                        <p>Medical Services</p>
+                    </div> -->
+                </div>
+
+                <nav class="nav-desktop">
+                    <a href="/" data-i18n="nav.home">Home</a> | 
+                    <a href="/services" data-i18n="nav.services">Services</a>  | 
+                    <a href="/beneficiaries" data-i18n="nav.beneficiaries">Beneficiaries</a>  | 
+                    <a href="/medical-network" data-i18n="nav.medical_network">Medical network</a>  | 
+                    <!--<a href="/technology">Technology & Innovation</a>-->
+                    <a href="/about" class="active" data-i18n="nav.about">About Us</a>  | 
+                    <a href="/contact" data-i18n="nav.contact">Contact us</a>
+                </nav>
+
+                <div class="header-buttons">
+                    <!-- <button class="btn btn-outline">Find a Provider</button> 
+					<button class="btn btn-medical">Submit a Claim</button>-->
+
+					<a href="/medical-network" data-i18n="nav.find_provider" class="btn btn-medical">Find a Provider</a>
+					
+					<!--<a href="/medical-network" class="btn btn-outline">Find a Provider</a>
+					<a href="/submit-claim" class="btn btn-medical">Submit a Claim</a>-->
+                </div>
+
+                <!-- Language Selector -->
+                <div class="lang-selector">
+				
+				
+                    <button class="lang-button" type="button" aria-haspopup="true" aria-expanded="false" onclick="toggleLangMenu(event)">
+                        <span class="current-lang-label">EN</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m6 9 6 6 6-6"/>
+                        </svg>
+                    </button>
+                    <div class="lang-menu hidden" role="menu">
+                        <button class="lang-option" role="menuitemradio" aria-checked="true" data-lang="en" onclick="setLanguage('en')">
+                            <span class="check">✓</span>
+                            <span>English</span>
+                        </button>
+                        <button class="lang-option" role="menuitemradio" aria-checked="false" data-lang="ar" onclick="setLanguage('ar')">
+                            <span class="check">✓</span>
+                            <span>العربية</span>
+                        </button>
+                    </div>
+                </div>
+
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="4" x2="20" y1="6" y2="6"/>
+                        <line x1="4" x2="20" y1="12" y2="12"/>
+                        <line x1="4" x2="20" y1="18" y2="18"/>
+                    </svg>
+                    <svg class="close-icon hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m18 6-12 12"/>
+                        <path d="m6 6 12 12"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="mobile-menu hidden">
+                <nav class="mobile-nav">
+				    <a href="/" data-i18n="nav.home">Home</a>
+                    <a href="/services" data-i18n="nav.services">Services</a>
+                    <a href="/beneficiaries" data-i18n="nav.beneficiaries">Beneficiaries</a> 
+                    <a href="/medical-network" data-i18n="nav.medical_network">Medical network</a> 
+                    <!--<a href="/technology">Technology & Innovation</a>-->
+                    <a href="/about" class="active" data-i18n="nav.about">About Us</a> 
+                    <a href="/contact" data-i18n="nav.contact">Contact us</a>
+
+                    <div class="mobile-buttons">
+					<!-- <button class="btn btn-outline">Find a Provider</button> 
+					<button class="btn btn-medical">Submit a Claim</button>-->
+					
+					<a href="/medical-network" data-i18n="nav.find_provider" class="btn btn-medical">Find a Provider</a>
+					
+					<!-- <a href="/medical-network" class="btn btn-outline">Find a Provider</a>
+					<a href="/submit-claim" class="btn btn-medical">Submit a Claim</a> -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+     <main class="main-content">
+	 <!-- Hero Section -->
+        <section class="about-hero">
+            <div class="container">
+                <h1>About Us</h1>
+                <p>Leading Third Party Administrator (TPA) medical services, delivering innovative healthcare administration solutions with excellence and integrity</p>
+                <div class="about-cta">
+                    <a href="/docs/MedSure corporate profile.pdf" target="_blank" class="btn btn-medical">
+                        <i class="fas fa-download"></i> Download Corporate Profile
+                    </a>
+                </div>
+            </div>
+        </section>
+		
+        <!-- Hero Section -->
+        <!--<section class="about-hero">
+            <div class="container">
+                <h1>Transforming Healthcare in Egypt</h1>
+                <p>Delivering innovative healthcare administration solutions with excellence and integrity</p>
+                <a href="/contact#contactForm" class="btn btn-medical">Get in touch</a>
+            </div>
+        </section>-->
+
+        <!-- Who We Are Section -->
+        <section class="about-section">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>Who We Are</h2>
+						<p>MedSure is a leading Third Party Administrator (TPA) established in 2020 aiming to provide superior and differentiated medical service.
+						Backed by EGP 500M+ in capital. To be able to provide that quality of service ,
+						we had to work hard to have every sector in our company efficient and of a superior quality and now 
+						we offer our clients a dynamic expanding medical network that covers all Egyptian governorates with more than 4800 service providers that offers best quality service level and best contractual prices in the market, professional and compassionate 24/7 available approval doctors, call center agents Full-online-platform for approvals, User friendly mobile app, in addition to our professional well-selected staff</p>
+					   <p>Our comprehensive solutions connect insurers, corporates, and healthcare providers through cutting-edge technology and efficient processes, ensuring seamless healthcare delivery across Egypt.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="/images/logo-about.png" alt="MedSure" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <!--<section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="170">0</div>
+                        <div class="stat-label">Million EGP Capital</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="50">0</div>
+                        <div class="stat-label">Healthcare Partners</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="100">0</div>
+                        <div class="stat-label">Corporate Clients</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="50000">0</div>
+                        <div class="stat-label">Lives Covered</div>
+                    </div>
+                </div>
+            </div>
+        </section>-->
+
+        <!-- Mission & Vision -->
+        <section class="mission-vision">
+            <div class="container">
+                <div class="mission-vision-grid">
+                    <div class="mission-card">
+                        <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
+                        <p>Utilizing our built-up know-how, technology, capital and applying our values, we aim to achieve excellence in service quality and value creation and become a role-model in the socially responsible investment in the healthcare sector in Egypt.</p>
+                    </div>
+                    <div class="vision-card">
+                        <h3><i class="fas fa-eye"></i> Our Vision</h3>
+                        <p>To become the leading healthcare management service provider, to be an add value to the Egyptian market through becoming a benchmark in setting standards of serving stakeholders.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="values-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Core Values</h2>
+                    <p>The foundation of everything we do</p>
+                </div>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="service-icon">
+							<img src="/images/core-values/Customer-Oriented.jpg" alt="Customer-Oriented" />
+						</div>
+					<!--<div class="value-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>-->
+                        <h4>Customer-Oriented</h4>
+                        <p>Our customers are at the heart of everything we do. We listen, understand, and are dedicated to providing exceptional service and support.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="service-icon">
+							<img src="/images/core-values/Transparency.jpg" alt="Transparency" />
+						</div>
+					<!--<div class="value-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>-->
+                        <h4>Transparency</h4>
+                        <p>We believe in open communication and clear processes. We are accountable for our actions and share information freely, fostering trust and understanding</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="service-icon">
+							<img src="/images/core-values/Honesty.jpg" alt="Honesty" />
+						</div>
+					<!--<div class="value-icon">
+                            <i class="fas fa-users"></i>
+                        </div>-->
+                        <h4>Honesty</h4>
+                        <p>Honesty is the foundation of our relationships. We are truthful, sincere, and direct in all our interactions with clients, partners, and each other.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="service-icon">
+							<img src="/images/core-values/Integrity.jpg" alt="Integrity" />
+						</div>
+					<!--<div class="value-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>-->
+                        <h4>Integrity</h4>
+                        <p>We uphold the highest ethical standards in everything we do. We are principled, reliable, and always do what is right, even when no one is watching.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="service-icon">
+							<img src="/images/core-values/Credibility.jpg" alt="Credibility" />
+						</div>
+					<!--<div class="value-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>-->
+                        <h4>Credibility</h4>
+                        <p>Our expertise and consistent delivery build trust and confidence. We are committed to excellence, ensuring that our actions and results speak for themselves.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="service-icon">
+							<img src="/images/core-values/Commitment.jpg" alt="Commitment" />
+						</div>
+					<!--<div class="value-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>-->
+                        <h4>Commitment</h4>
+                        <p>We approach healthcare with empathy, understanding that behind every claim is a person seeking care.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leadership Team -->
+        <!--<section class="team-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Leadership Team</h2>
+                    <p>Meet the experts guiding our vision forward</p>
+                </div>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="team-image">
+                            <img src="/images/man avatar.png" alt="Team Member" loading="lazy">
+                        </div>
+                        <div class="team-info">
+                            <h4>Dr.Nader Fayez</h4>
+                            <p>Chief Executive Officer</p>
+                            <div class="team-social">
+                                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-image">
+                            <img src="/images/man avatar.png" alt="Team Member" loading="lazy">
+                        </div>
+                        <div class="team-info">
+                            <h4>Mr.Maged Yousry</h4>
+                            <p>Chief Operations Officer</p>
+                            <div class="team-social">
+                                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-image">
+                            <img src="/images/man avatar.png" alt="Team Member" loading="lazy">
+                        </div>
+                        <div class="team-info">
+                            <h4>Omar Hassan</h4>
+                            <p>Chief Technology Officer</p>
+                            <div class="team-social">
+                                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>-->
+		
+        <!-- CTA Section -->
+        <!--<section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to Transform Your Healthcare Experience?</h2>
+                    <p>Join the growing number of organizations benefiting from MedSure's innovative solutions.</p>
+                    <div class="cta-buttons">
+                        <a href="/contact" class="btn2 btn-primary">Get in Touch</a>
+                        <a href="/services" class="btn2 btn-outline">Our Services</a>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+    </main>
+
+     <!-- Footer -->
+    <MyFooter />
+    	<!-- In the head section, add this before main.js -->
+	<script is:inline src="/js/translations.js"></script>
+	<script is:inline src="/js/main.js"></script>
+	<script is:inline src="/js/counter.js"></script>
+</body>
+</html>

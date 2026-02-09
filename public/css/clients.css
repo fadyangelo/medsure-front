@@ -1,0 +1,295 @@
+/* Clients Page Styles */
+
+/* Hero Section */
+.clients-hero {
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.9), rgba(13, 71, 161, 0.9)), 
+                url('../images/hospital-exterior.jpg') center/cover no-repeat;
+    color: white;
+    padding: 8rem 0;
+    text-align: center;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.clients-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.clients-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.clients-hero h1 {
+    font-size: var(--font-size-5xl);
+    margin-bottom: var(--spacing-4);
+    font-weight: 800;
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.clients-hero p {
+    font-size: var(--font-size-xl);
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0.95;
+    line-height: 1.7;
+    font-weight: 300;
+}
+
+/* Why Partner Section */
+.why-partner {
+    padding: var(--spacing-20) 0;
+    background-color: var(--white);
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-8);
+    margin-top: var(--spacing-12);
+}
+
+.benefit-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-8);
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition), box-shadow var(--transition);
+    text-align: center;
+    border: 1px solid var(--color-border);
+}
+
+.benefit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.benefit-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--spacing-4);
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+}
+
+.benefit-card h3 {
+    font-size: var(--font-size-xl);
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-2);
+}
+
+.benefit-card p {
+    color: var(--text-light);
+    line-height: 1.7;
+}
+
+/* Case Study Section */
+.case-study {
+    padding: var(--spacing-20) 0;
+    background-color: var(--light-bg);
+}
+
+.testimonial {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-8);
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: var(--shadow-md);
+    position: relative;
+}
+
+.testimonial::before {
+    content: '"\201C"';
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    font-size: 8rem;
+    color: var(--primary-color);
+    opacity: 0.1;
+    font-family: Georgia, serif;
+    line-height: 1;
+}
+
+.testimonial-content {
+    position: relative;
+    z-index: 1;
+}
+
+.quote {
+    font-size: var(--font-size-xl);
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: var(--spacing-6);
+    color: var(--text-dark);
+}
+
+.testimonial-author h4 {
+    font-size: var(--font-size-lg);
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-1);
+}
+
+.testimonial-author p {
+    color: var(--text-light);
+    font-size: var(--font-size-sm);
+}
+
+/* Team Testimonials */
+.team-testimonials {
+    padding: var(--spacing-20) 0;
+    background-color: var(--white);
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-8);
+    margin-top: var(--spacing-12);
+}
+
+.testimonial-card {
+    background: var(--light-bg);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-8);
+    transition: transform var(--transition), box-shadow var(--transition);
+    border: 1px solid var(--color-border);
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.testimonial-text {
+    font-size: var(--font-size-lg);
+    line-height: 1.7;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-6);
+    position: relative;
+    padding-left: var(--spacing-8);
+}
+
+.testimonial-text::before {
+    content: '"';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 4rem;
+    line-height: 1;
+    color: var(--primary-color);
+    opacity: 0.2;
+    font-family: Georgia, serif;
+}
+
+.testimonial-author h4 {
+    font-size: var(--font-size-lg);
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-1);
+}
+
+.testimonial-author p {
+    color: var(--text-light);
+    font-size: var(--font-size-sm);
+}
+
+/* CTA Section */
+.proposal-cta {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: var(--spacing-20) 0;
+    text-align: center;
+}
+
+.cta-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.cta-content h2 {
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--spacing-4);
+    color: white;
+}
+
+.cta-content p {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-8);
+    opacity: 0.9;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: var(--spacing-4);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .clients-hero {
+        padding: 6rem 0;
+        min-height: 50vh;
+    }
+    
+    .clients-hero h1 {
+        font-size: var(--font-size-4xl);
+    }
+    
+    .clients-hero p {
+        font-size: var(--font-size-lg);
+    }
+    
+    .testimonial {
+        padding: var(--spacing-6);
+    }
+    
+    .quote {
+        font-size: var(--font-size-lg);
+    }
+    
+    .cta-content h2 {
+        font-size: var(--font-size-3xl);
+    }
+    
+    .cta-content p {
+        font-size: var(--font-size-lg);
+    }
+}
+
+@media (max-width: 480px) {
+    .clients-hero h1 {
+        font-size: var(--font-size-3xl);
+    }
+    
+    .benefits-grid,
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}

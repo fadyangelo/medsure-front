@@ -1,0 +1,402 @@
+/* Beneficiaries Page Styles */
+
+/* Hero Section */
+.beneficiaries-hero {
+	background: linear-gradient(135deg, rgba(33, 150, 243, 0.9), rgba(13, 71, 161, 0.9));
+    color: white;
+    padding: 5rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.beneficiaries-hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
+}
+
+.beneficiaries-hero p {
+    font-size: 1.25rem;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+/*
+.beneficiaries-hero {
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.9), rgba(13, 71, 161, 0.9)), 
+                url('../images/family-insurance.jpg') center/cover no-repeat;
+    color: white;
+    padding: 8rem 0;
+    text-align: center;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.beneficiaries-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.beneficiaries-hero .container {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.beneficiaries-hero h1 {
+    font-size: var(--font-size-5xl);
+    margin-bottom: var(--spacing-4);
+    font-weight: 800;
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.beneficiaries-hero p {
+    font-size: var(--font-size-xl);
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0.95;
+    line-height: 1.7;
+    font-weight: 300;
+}
+*/
+
+
+/* Benefits Section */
+.benefits-section {
+    padding: var(--spacing-20) 0;
+    background-color: var(--white);
+}
+
+.benefits-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-4);
+}
+
+.benefits-header {
+    text-align: center;
+    margin-bottom: var(--spacing-12);
+}
+
+.benefits-header h2 {
+    font-size: var(--font-size-4xl);
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-2);
+}
+
+.benefits-header p {
+    color: var(--text-light);
+    font-size: var(--font-size-lg);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-8);
+    margin-top: var(--spacing-12);
+}
+
+.benefit-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-8);
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition), box-shadow var(--transition);
+    border: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.benefit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.benefit-icon {
+    margin-bottom: 1.5rem;
+}
+
+.benefit-icon img {
+    /*width: 100%;
+    height: 160px;*/
+	height: 260px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+}
+
+/*
+.benefit-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    margin-bottom: var(--spacing-4);
+}*/
+
+.benefit-card h3 {
+    font-size: var(--font-size-xl);
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-3);
+}
+
+.benefit-card p {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-6);
+    flex-grow: 1;
+	text-align: justify;
+    text-justify: inter-word;
+}
+
+
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    background: var(--primary-color);
+    /*color: white;*/
+    padding: var(--spacing-2) var(--spacing-4);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+	font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin-top: auto;
+    align-self: flex-start;
+	
+    transition: background-color var(--transition);
+    /*border: none;*/
+    cursor: pointer;
+}
+
+.download-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+/*.download-btn:hover {
+    background: var(--primary-dark);
+    color: white;
+}*/
+
+.download-btn i {
+    font-size: 1.2em;
+}
+
+
+
+/*
+.download-links {
+    display: flex;
+    gap: var(--spacing-2);  //space between links 
+    flex-wrap: wrap;         //wrap if screen is too small 
+    justify-content: center;  //optional: center the links 
+}
+
+.download-links .download-btn {
+    margin-top: 0; // remove auto spacing if present 
+    align-self: auto; //reset flex alignment 
+}*/
+
+
+.download-links {
+    display: flex;
+    gap: var(--spacing-2);       /* space between links */
+    flex-wrap: wrap;              /* allow wrapping on very small screens */
+    justify-content: center;      /* center all links horizontally */
+}
+
+.download-links .download-btn {
+    white-space: nowrap;          /* keep text in one line inside the button */
+    display: inline-flex;         /* flex for icon+text inside button */
+    align-items: center;
+}
+
+/*-------------------------*/
+
+
+
+
+/* App Showcase Section */
+.app-showcase {
+    background: var(--light-bg);
+    padding: var(--spacing-20) 0;
+}
+
+.app-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-12);
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-4);
+}
+
+.app-content {
+    padding-right: var(--spacing-8);
+}
+
+.app-content h2 {
+    font-size: var(--font-size-4xl);
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-4);
+}
+
+.app-content p {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-6);
+}
+
+.app-features {
+    margin: var(--spacing-8) 0;
+}
+
+.app-feature {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-4);
+}
+
+.app-feature i {
+    color: var(--primary-color);
+    margin-right: var(--spacing-3);
+    margin-top: var(--spacing-1);
+    font-size: 1.2em;
+}
+
+.app-screenshot {
+    position: relative;
+    text-align: center;
+}
+
+.app-screenshot img {
+    max-width: 100%;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    transition: transform var(--transition);
+}
+
+.app-screenshot img:hover {
+    transform: translateY(-5px);
+}
+
+
+/* Video Section */
+.video-section {
+    background: var(--light-bg);
+    padding: var(--spacing-20) 0;
+}
+
+.video-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-4);
+    text-align: center;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    margin-top: var(--spacing-8);
+    background: #000;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .app-container {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-12);
+    }
+    
+    .app-content {
+        padding-right: 0;
+        text-align: center;
+    }
+    
+    .app-feature {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .beneficiaries-hero h1 {
+        font-size: var(--font-size-4xl);
+    }
+    
+    .beneficiaries-hero p {
+        font-size: var(--font-size-lg);
+    }
+	
+	/*.beneficiaries-hero {
+        padding: 6rem 0;
+        min-height: 50vh;
+    }
+    
+    .beneficiaries-hero h1 {
+        font-size: var(--font-size-4xl);
+    }*/
+    
+    .beneficiaries-hero p {
+        font-size: var(--font-size-lg);
+    }
+    
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .app-container {
+        gap: var(--spacing-8);
+    }
+}
+
+@media (max-width: 480px) {
+    .beneficiaries-hero h1 {
+        font-size: var(--font-size-3xl);
+    }
+    
+    .benefits-header h2 {
+        font-size: var(--font-size-3xl);
+    }
+    
+    .app-content h2 {
+        font-size: var(--font-size-3xl);
+    }
+}

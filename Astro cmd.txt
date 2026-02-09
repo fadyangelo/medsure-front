@@ -1,0 +1,57 @@
+# https://astro.build/
+npm create astro@latest
+
+cd client
+yarn dev
+
+cls
+
+git clone https://github.com/PaulBratslavsky/pauls-strapi-crashcourse.git server
+
+# Install NodeJS ver 20.18
+nvm install 20.18.0
+
+# If you want to use this version, type:
+nvm use 20.18.0
+
+#======================== Start here ==========================
+cd C:\Fady\MyDoc\Learn\Strapi\Videos\Astro\Proj\server
+nvm current
+yarn dev
+
+
+#Install project dependencies
+yarn
+
+#Build project
+yarn build
+
+npm install
+
+#Build
+npm run dev
+
+#Build (Best)
+npm run build
+
+#Start project
+yarn dev
+
+
+
+
+-------------------------
+Get fetch API
+https://jsonplaceholder.typicode.com/todos 
+
+
+#======== Add Tailwind ========
+npx astro add tailwind
+
+========================
+#======== Add node ========
+npx astro add node
+npm install @astrojs/node
+#======== Deploy Astro SSR on IIS ========
+## Deploy Server Side Rendering on IIS
+https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221TehEWgQfQ5WBW-0U1R2W--m8AZ-IpmbL%22%5D,%22action%22:%22open%22,%22userId%22:%22104208211072866231173%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing 

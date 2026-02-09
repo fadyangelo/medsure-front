@@ -1,0 +1,399 @@
+/* Technology & Innovation Page Styles */
+
+/* Hero Section */
+.technology-hero {
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.9), rgba(13, 71, 161, 0.9)), 
+                url('../images/tech-bg.jpg') center/cover no-repeat;
+    color: white;
+    padding: 8rem 0;
+    text-align: center;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.technology-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.technology-hero .container {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.technology-hero h1 {
+    font-size: var(--font-size-5xl);
+    margin-bottom: var(--spacing-4);
+    font-weight: 800;
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.technology-hero p {
+    font-size: var(--font-size-xl);
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0.95;
+    line-height: 1.7;
+    font-weight: 300;
+}
+
+/* Features Section */
+.features-section {
+    padding: var(--spacing-20) 0;
+    background-color: var(--white);
+}
+
+.features-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-4);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-12);
+}
+
+.section-header h2 {
+    font-size: var(--font-size-4xl);
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-2);
+}
+
+.section-header p {
+    color: var(--text-light);
+    font-size: var(--font-size-lg);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-8);
+    margin-top: var(--spacing-12);
+}
+
+.feature-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-8);
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition), box-shadow var(--transition);
+    border: 1px solid var(--color-border);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient-primary);
+    transition: height 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.feature-card:hover::before {
+    height: 6px;
+}
+
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--spacing-4);
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.feature-card h3 {
+    font-size: var(--font-size-xl);
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-3);
+}
+
+.feature-card p {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-6);
+}
+
+/* App Showcase Section */
+.app-showcase {
+    background: var(--light-bg);
+    padding: var(--spacing-20) 0;
+}
+
+.app-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-12);
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-4);
+}
+
+.app-content {
+    padding-right: var(--spacing-8);
+}
+
+.app-content h2 {
+    font-size: var(--font-size-4xl);
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-4);
+}
+
+.app-content p {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-6);
+}
+
+.app-features {
+    margin: var(--spacing-8) 0;
+}
+
+.app-feature {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-4);
+}
+
+.app-feature i {
+    color: var(--primary-color);
+    margin-right: var(--spacing-3);
+    margin-top: var(--spacing-1);
+    font-size: 1.2em;
+}
+
+.app-screenshot {
+    position: relative;
+    text-align: center;
+}
+
+.app-screenshot img {
+    max-width: 100%;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    transition: transform var(--transition);
+}
+
+.app-screenshot img:hover {
+    transform: translateY(-5px);
+}
+
+.download-buttons {
+    display: flex;
+    gap: var(--spacing-4);
+    margin-top: var(--spacing-6);
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    background: var(--primary-color);
+    color: white;
+    padding: var(--spacing-2) var(--spacing-4);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.download-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.download-btn i {
+    font-size: 1.2em;
+}
+
+/* App Download Section */
+.app-download-section {
+    background: var(--light-bg);
+    padding: var(--spacing-20) 0;
+}
+
+.app-download-container {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--spacing-12);
+    align-items: center;
+}
+
+.app-download-content h2 {
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--spacing-3);
+    color: var(--text-dark);
+}
+
+.app-download-content p {
+    color: var(--text-light);
+    margin-bottom: var(--spacing-6);
+}
+
+.app-download-content { text-align: center; }
+
+.store-buttons {
+    display: flex;
+    gap: var(--spacing-4);
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.store-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-3) var(--spacing-4);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: #fff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    box-shadow: var(--shadow-sm);
+    font-weight: 600;
+}
+
+.store-btn small {
+    display: block;
+    font-size: 10px;
+    opacity: 0.9;
+}
+
+.store-btn.google { background: #000; }
+.store-btn.apple { background: #000; }
+
+.store-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+.store-btn i { font-size: 20px; }
+
+.app-visual {
+    display: flex;
+    justify-content: center;
+}
+
+.phone-mockup {
+    width: 230px;
+    height: 460px;
+    border-radius: 28px;
+    background: linear-gradient(145deg, #e6eef7, #ffffff);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08), inset 0 0 0 8px #111;
+    position: relative;
+}
+
+.phone-mockup::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 6px;
+    border-radius: 3px;
+    background: #222;
+}
+
+@media (max-width: 992px) {
+    .app-download-container { grid-template-columns: 1fr; }
+    .app-visual { order: -1; margin-bottom: var(--spacing-6); }
+}
+
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .app-container {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-12);
+    }
+    
+    .app-content {
+        padding-right: 0;
+        text-align: center;
+    }
+    
+    .app-feature {
+        justify-content: center;
+    }
+    
+    .download-buttons {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .technology-hero {
+        padding: 6rem 0;
+        min-height: 50vh;
+    }
+    
+    .technology-hero h1 {
+        font-size: var(--font-size-4xl);
+    }
+    
+    .technology-hero p {
+        font-size: var(--font-size-lg);
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .download-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .download-btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .technology-hero h1 {
+        font-size: var(--font-size-3xl);
+    }
+    
+    .section-header h2 {
+        font-size: var(--font-size-3xl);
+    }
+    
+    .app-content h2 {
+        font-size: var(--font-size-3xl);
+    }
+}

@@ -1,0 +1,679 @@
+---
+import { STRAPI_URL } from 'astro:env/server';
+
+// We only use the server variable here to pass it to the client if needed, 
+// but we will stick to the specific URL provided in your request.
+const medicalNetwork_APIPath = `${STRAPI_URL}/api/medical-network`;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="page-medical-network">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedSure - Medical Insurance Services</title>
+    <meta name="description" content="Comprehensive medical insurance solutions designed to protect you and your family.">
+    
+    <!-- CSS Dependencies -->
+    <link rel="stylesheet" href="/fonts/cairo/stylesheet.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/contact.css">
+    <link rel="stylesheet" href="/css/services.css">
+    <link rel="stylesheet" href="/css/counter.css">
+    <link rel="stylesheet" href="/css/medical-network.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <!-- Leaflet Marker Cluster CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+
+    <style>
+        /* Map Loader Overlay */
+        .map-wrapper { position: relative; }
+        .map-loader {
+            position: absolute; top: 10px; right: 10px; z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px 16px; border-radius: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: none; align-items: center; gap: 8px;
+            font-size: 13px; font-weight: 700; color: #2563eb;
+            transition: opacity 0.3s ease;
+        }
+        .map-loader.active { display: flex; }
+        
+        .spinner-mini {
+            width: 16px; height: 16px; border: 2px solid #e5e7eb;
+            border-top-color: #2563eb; border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header" id="headermain">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <img src="/images/logo_icon.png" alt="MedSure Logo" class="logo-img">
+                    </div>
+                </div>
+
+                <nav class="nav-desktop">
+                    <a href="/" data-i18n="nav.home">Home</a> | 
+                    <a href="/services" data-i18n="nav.services">Services</a>  | 
+                    <a href="/beneficiaries" data-i18n="nav.beneficiaries">Beneficiaries</a>  | 
+                    <a href="/medical-network" class="active" data-i18n="nav.medical_network">Medical network</a>  | 
+                    <a href="/about" data-i18n="nav.about">About Us</a>  | 
+                    <a href="/contact" data-i18n="nav.contact">Contact us</a>
+                </nav>
+
+                <div class="header-buttons">
+                    <a href="/medical-network" data-i18n="nav.find_provider" class="btn btn-medical">Find a Provider</a>
+                </div>
+
+                <!-- Language Selector -->
+                <div class="lang-selector">
+                    <button class="lang-button" type="button" aria-haspopup="true" aria-expanded="false" onclick="toggleLangMenu(event)">
+                        <span class="current-lang-label">EN</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m6 9 6 6 6-6"/>
+                        </svg>
+                    </button>
+                    <div class="lang-menu hidden" role="menu">
+                        <button class="lang-option" role="menuitemradio" aria-checked="true" data-lang="en" onclick="setLanguage('en')">
+                            <span class="check">✓</span>
+                            <span>English</span>
+                        </button>
+                        <button class="lang-option" role="menuitemradio" aria-checked="false" data-lang="ar" onclick="setLanguage('ar')">
+                            <span class="check">✓</span>
+                            <span>العربية</span>
+                        </button>
+                    </div>
+                </div>
+
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="4" x2="20" y1="6" y2="6"/>
+                        <line x1="4" x2="20" y1="12" y2="12"/>
+                        <line x1="4" x2="20" y1="18" y2="18"/>
+                    </svg>
+                    <svg class="close-icon hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m18 6-12 12"/>
+                        <path d="m6 6 12 12"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="mobile-menu hidden">
+                <nav class="mobile-nav">
+                    <a href="/" data-i18n="nav.home">Home</a>
+                    <a href="/services" data-i18n="nav.services">Services</a>
+                    <a href="/beneficiaries" data-i18n="nav.beneficiaries">Beneficiaries</a> 
+                    <a href="/medical-network" class="active" data-i18n="nav.medical_network">Medical network</a> 
+                    <a href="/about" data-i18n="nav.about">About Us</a> 
+                    <a href="/contact" data-i18n="nav.contact">Contact us</a>
+
+                    <div class="mobile-buttons">
+                        <a href="/medical-network" data-i18n="nav.find_provider" class="btn btn-medical">Find a Provider</a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="network-hero">
+            <div class="container">
+                <h1>Find a Healthcare Provider</h1>
+                <p>Search our network of trusted healthcare providers across Egypt</p>
+            </div>
+        </section>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-container">
+                <form id="provider-search-form">
+                    <div class="search-filters">
+                        <div class="filter-group">
+                            <label for="city">City</label>
+                            <select id="city" class="filter-select">
+                                <option value="">All Cities</option>
+                                <option value="القاهرة">القاهرة</option>
+                                <option value="الجيزة">الجيزة</option>
+                                <option value="الاسكندرية">الاسكندرية</option>
+                                <option value="الاسماعيلية">الاسماعيلية</option>
+                                <option value="الاقصر">الاقصر</option>
+                                <option value="البحر الاحمر">البحر الاحمر</option>
+                                <option value="البحيرة">البحيرة</option>
+                                <option value="الدقهلية">الدقهلية</option>
+                                <option value="السويس">السويس</option>
+                                <option value="الشرقية">الشرقية</option>
+                                <option value="الغربية">الغربية</option>
+                                <option value="الفيوم">الفيوم</option>
+                                <option value="القليوبية">القليوبية</option>
+                                <option value="المنوفية">المنوفية</option>
+                                <option value="المنيا">المنيا</option>
+                                <option value="الوادي الجديد">الوادي الجديد</option>
+                                <option value="أسوان">أسوان</option>
+                                <option value="أسيوط">أسيوط</option>
+                                <option value="بني سويف">بني سويف</option>
+                                <option value="بورسعيد">بورسعيد</option>
+                                <option value="جنوب سيناء">جنوب سيناء</option>
+                                <option value="دمياط">دمياط</option>
+                                <option value="سوهاج">سوهاج</option>
+                                <option value="شمال سيناء">شمال سيناء</option>
+                                <option value="قنا">قنا</option>
+                                <option value="كفر الشيخ">كفر الشيخ</option>
+                                <option value="مرسى مطروح">مرسى مطروح</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="specialty">Specialty</label>
+                            <select id="specialty" class="filter-select">
+                                <option value="">All Specialties</option>
+                                <option value="للقلب و الاوعية الدموية">للقلب و الاوعية الدموية</option>
+                                <option value="MRI - CT - Xray - Sonar">MRI - CT - Xray - Sonar</option>
+                                <option value="اخصائى الجراحة العامة والاورام والمناظير">اخصائى الجراحة العامة والاورام والمناظير</option>
+                                <option value="اخصائى الجهاز الهضمى والكبد">اخصائى الجهاز الهضمى والكبد</option>
+                                <option value="اخصائى امراض النساء والتوليد">اخصائى امراض النساء والتوليد</option>
+                                <option value="اخصائى باطنة">اخصائى باطنة</option>
+                                <option value="اخصائى باطنه">اخصائى باطنه</option>
+                                <option value="اخصائى جراحة العظام">اخصائى جراحة العظام</option>
+                                <option value="اخصائى جراحة العيون">اخصائى جراحة العيون</option>
+                                <option value="اخصائى جراحة عامة وجراحة المناظير">اخصائى جراحة عامة وجراحة المناظير</option>
+                                <option value="اخصائى جراحة عظام">اخصائى جراحة عظام</option>
+                                <option value="اخصائى جلدية وتناسلية">اخصائى جلدية وتناسلية</option>
+                                <option value="اخصائى صدر">اخصائى صدر</option>
+                                <option value="اشعة">اشعة</option>
+                                <option value="اطفال">اطفال</option>
+                                <option value="التحاليل الطبية">التحاليل الطبية</option>
+                                <option value="العيون والليزك">العيون والليزك</option>
+                                <option value="القلب و القسطرة">القلب و القسطرة</option>
+                                <option value="الكلى والمسالك">الكلى والمسالك</option>
+                                <option value="النساء والتوليد وعلاج العقم">النساء والتوليد وعلاج العقم</option>
+                                <option value="امراض القلب">امراض القلب</option>
+                                <option value="امراض باطنة">امراض باطنة</option>
+                                <option value="انف و اذن و حنجرة">انف و اذن و حنجرة</option>
+                                <option value="اورام">اورام</option>
+                                <option value="باطنة">باطنة</option>
+                                <option value="تحاليل">تحاليل</option>
+                                <option value="جراحة عامة">جراحة عامة</option>
+                                <option value="جراحة عظام">جراحة عظام</option>
+                                <option value="جراحة عيون">جراحة عيون</option>
+                                <option value="جلديه وتناسليه">جلديه وتناسليه</option>
+                                <option value="علاج طبيعى">علاج طبيعى</option>
+                                <option value="عيون">عيون</option>
+                                <option value="قلب">قلب</option>
+                                <option value="مخ واعصاب">مخ واعصاب</option>
+                                <option value="مسالك بولية">مسالك بولية</option>
+                                <option value="نساء و توليد">نساء و توليد</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="network">Network</label>
+                            <select id="network" class="filter-select">
+                                <option value="">All Tiers</option>
+                                <option value="A++">A++</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="provider">Provider name</label>
+                            <input type="text" id="provider" class="filter-select" placeholder="Search by name">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Map Section -->
+        <section class="map-section">
+            <div class="container">
+                <div class="map-wrapper">
+                    <div id="map-loader" class="map-loader">
+                        <div class="spinner-mini"></div>
+                        <span>Updating Area...</span>
+                    </div>
+                    <div id="provider-map" style="height: 500px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08);"></div>
+                </div>
+                <div id="results-count" style="text-align:center; padding-top:10px; color:#555; font-weight:600;"></div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stats-container">
+                <div class="section-header">
+                    <h2>Our Network at a Glance</h2>
+                    <p>Trusted by thousands across Egypt</p>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <!-- THIS ID WILL SHOW "99+" -->
+                        <div class="stat-number" id="visible-providers-count">0</div>
+                        <div class="stat-label">Providers in View</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-number">27</div>
+                        <div class="stat-label">Governorates Covered</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Approval Rate</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Medical Support</div>
+                    </div>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3><i class="fas fa-network-wired"></i> Comprehensive Network</h3>
+                        <ul>
+                            <li>Weekly updated directory</li>
+                            <li>Full specialty coverage</li>
+                            <li>Graded network (A++, A+, A)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3><i class="fas fa-headset"></i> Real Medical Support</h3>
+                        <p>Our call center is staffed by trained medical professionals, ready to assist with approvals, questions, or emergencies anytime.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3><i class="fas fa-bolt"></i> Fast Approvals & Claims</h3>
+                        <ul>
+                            <li>98% of outpatient approvals in under 10 minutes</li>
+                            <li>Reimbursements processed within 5–14 working days</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3><i class="fas fa-building"></i> Employer Solutions</h3>
+                        <p>We support both insured and self-funded models, with real-time dashboards, cost tracking, and custom reporting tools.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3><i class="fas fa-id-card"></i> Smart Medical Cards</h3>
+                        <p>Whether it's a cash, prepaid, or insurance card — members get access to discounted rates, fast approvals, and a smooth experience every time.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3><i class="fas fa-hands-helping"></i> On-the-Ground Support</h3>
+                        <p>We offer roving doctors, doctor-on-site (DOS) visits, and in-house network communication to resolve issues on the spot.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Provider Form Section -->
+        <section class="provider-form-section">
+            <div class="provider-form-container">
+                <div class="provider-form">
+                    <div class="form-title">
+                        <h2>Want to join our network?</h2>
+                        <p>Fill out the form below to become a MedSure healthcare provider</p>
+                    </div>
+                    
+                    <form id="provider-application-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="facility-name">Facility Name *</label>
+                                <input type="text" id="facility-name" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="facility-type">Facility Type *</label>
+                                <select id="facility-type" class="form-control" required>
+                                    <option value="">Select Facility Type</option>
+                                    <option value="hospital">Hospital</option>
+                                    <option value="clinic">Clinic</option>
+                                    <option value="pharmacy">Pharmacy</option>
+                                    <option value="lab">Laboratory</option>
+                                    <option value="radiology">Radiology Center</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contact-person">Contact Person *</label>
+                                <input type="text" id="contact-person" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="location">Location (City/Governorate) *</label>
+                                <input type="text" id="location" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="address">Full Address *</label>
+                                <input type="text" id="address" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="services">Services Provided *</label>
+                                <textarea id="services" class="form-control" required></textarea>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="message">Additional Information</label>
+                                <textarea id="message" class="form-control" placeholder="Tell us about your facility and why you'd like to join our network"></textarea>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-paper-plane"></i> Submit Application
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+     <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-logo">
+                        <img src="/images/logo_icon.png" alt="MedSure Logo" class="footer-logo-img">
+                        <div class="footer-logo-text">
+                            <h3>MedSure</h3>
+                            <p>Medical Insurance Services</p>
+                        </div>
+                    </div>
+                    <p class="footer-description">
+                        Your trusted partner in healthcare insurance. We provide comprehensive medical coverage 
+                        to protect you and your family's health and financial well-being.
+                    </p>
+                    <div class="footer-contact">
+                        <div class="contact-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+							<span class="footerLink"><a href="tel:17672">17672</a> | <a href="tel:0221277888">02-21277888</a></span>
+                        </div>
+                        <div class="contact-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                            <span class="footerLink"><a href="mailto:info@medsure.com.eg">info@medsure.com.eg</a> | <a class="footerLink" href="mailto:CS@medsure.com.eg">CS@medsure.com.eg</a></span>
+                        </div>
+                        <div class="contact-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                            <span>15 El-Bostan St., Sheraton El-Matar, Heliopolis, Cairo</span>
+                        </div>
+                    </div>
+
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook" rel="noopener">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/" target="_blank" aria-label="LinkedIn" rel="noopener">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram" rel="noopener">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+						<a href="https://www.X.com/" target="_blank" aria-label="X" rel="noopener">
+                           <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+
+			<div class="footer-links">
+                <h4>Services</h4>
+                    <ul>
+                        <li><a href="/services">Services</a></li>
+						<li><a href="/beneficiaries">Beneficiaries</a></li>
+						<li><a href="resources">Resources</a></li>
+						<li><a href="/medical-network">Medical network</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/careers">Careers</a></li>
+						<li><a href="/contact">Contact us</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+				<p>&copy; <script is:inline>document.write(new Date().getFullYear())</script> MedSure Medical Services. All rights reserved.</p>
+				<p style="font-size:12px;text-align:center">Developed by <a style="color:#a7d3fb;" href="https://itspark-eg.com" target="_blank">ITSpark</a></p>
+            </div>
+        </div>
+    </footer>
+	<a href="https://wa.me/201288621773" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script is:inline src="/js/main.js"></script>
+    <!-- Leaflet JS -->
+    <script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <!-- Leaflet Marker Cluster JS -->
+    <script is:inline src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+
+    <!-- MAIN MAP LOGIC -->
+    <script is:inline>
+        // --- 1. CONFIGURATION ---
+        const API_URL = "https://medsure1.itspark-eg.com/api/medical-networks";
+        
+        // This MUST be 100 to trigger the "99+" logic correctly
+        const FETCH_LIMIT = 100; 
+        
+        // Initialize Map
+        const map = L.map('provider-map', { preferCanvas: true }).setView([26.8206, 30.8025], 6);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; MedSure'
+        }).addTo(map);
+
+        // Initialize Marker Cluster
+        const markers = L.markerClusterGroup({
+            chunkedLoading: true, 
+            disableClusteringAtZoom: 16,
+            spiderfyOnMaxZoom: true
+        });
+        map.addLayer(markers);
+
+        // Custom Icon
+        const customIcon = L.icon({
+            iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+            iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+            shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+            iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
+        });
+
+        const loader = document.getElementById('map-loader');
+        const resultsCountEl = document.getElementById('results-count');
+        const statCountEl = document.getElementById('visible-providers-count');
+
+        // --- 2. DATA FETCHING ---
+        async function fetchMedicalNetwork() {
+            if(loader) loader.classList.add('active');
+
+            // Inputs
+            const city = document.getElementById('city')?.value || '';
+            const specialty = document.getElementById('specialty')?.value || '';
+            const network = document.getElementById('network')?.value || '';
+            const name = document.getElementById('provider')?.value || '';
+
+            // Map Bounds
+            const bounds = map.getBounds();
+            const north = bounds.getNorth();
+            const south = bounds.getSouth();
+            const east = bounds.getEast();
+            const west = bounds.getWest();
+
+            const params = new URLSearchParams();
+            
+            // Limit Request to 100
+            params.append('pagination[pageSize]', FETCH_LIMIT);
+
+            // Fields
+            params.append('fields[0]', 'ProviderName');
+            params.append('fields[1]', 'Latitude');
+            params.append('fields[2]', 'Longitude');
+            params.append('fields[3]', 'City');
+            params.append('fields[4]', 'Specialty');
+            params.append('fields[5]', 'NetworkType');
+            params.append('fields[6]', 'Address');
+
+            // Apply Filters
+            if (city) params.append('filters[City][$eq]', city);
+            if (specialty) params.append('filters[Specialty][$eq]', specialty);
+            if (network) params.append('filters[NetworkType][$eq]', network);
+            if (name) params.append('filters[ProviderName][$contains]', name);
+
+            // Geo Filters
+            params.append('filters[Latitude][$gte]', south);
+            params.append('filters[Latitude][$lte]', north);
+            params.append('filters[Longitude][$gte]', west);
+            params.append('filters[Longitude][$lte]', east);
+
+            try {
+                const res = await fetch(`${API_URL}?${params.toString()}`);
+                if (!res.ok) throw new Error("API Error");
+                
+                const json = await res.json();
+                updateMap(json.data || []);
+
+            } catch (error) {
+                console.error("Map Data Error:", error);
+            } finally {
+                if(loader) loader.classList.remove('active');
+            }
+        }
+
+        // --- 3. UPDATE MAP & COUNTERS ---
+        function updateMap(data) {
+            markers.clearLayers();
+            const newMarkers = [];
+
+            data.forEach(item => {
+                // Parse coordinates safely
+                const lat = parseFloat(item.Latitude);
+                const lng = parseFloat(item.Longitude);
+
+                if (!isNaN(lat) && !isNaN(lng)) {
+                    const m = L.marker([lat, lng], { icon: customIcon });
+                    
+                    const popupHtml = `
+                        <div style="min-width:200px; font-family:'Cairo',sans-serif;">
+                            <h4 style="color:#2563eb; margin:0 0 5px 0;">${item.ProviderName}</h4>
+                            <div style="font-size:13px; color:#555;">
+                                <strong>Type:</strong> ${item.ProviderType || '-'}<br>
+                                <strong>City:</strong> ${item.City || '-'}<br>
+                                <strong>Specialty:</strong> ${item.Specialty || '-'}<br>
+                                <strong>Network:</strong> <span style="background:#eee; padding:2px 4px; border-radius:3px; font-weight:bold;">${item.NetworkType || 'A'}</span>
+                                ${item.Address ? `<hr style="margin:5px 0; border:0; border-top:1px solid #ddd;">${item.Address}` : ''}
+                            </div>
+                        </div>
+                    `;
+                    m.bindPopup(popupHtml);
+                    newMarkers.push(m);
+                }
+            });
+
+            // Add markers to cluster
+            markers.addLayers(newMarkers);
+            
+            // --- UPDATED LOGIC FOR 99+ ---
+            const count = newMarkers.length;
+            
+            if (count >= 100) {
+                // Count is 100 or greater
+                if(statCountEl) statCountEl.innerText = "99+";
+                if(resultsCountEl) resultsCountEl.innerText = `Showing 100+ providers in this area (Zoom in for details)`;
+            } else {
+                // Count is less than 100
+                if(statCountEl) statCountEl.innerText = count;
+                if(resultsCountEl) resultsCountEl.innerText = `Found ${count} providers in this area`;
+            }
+        }
+
+        // --- 4. EVENTS ---
+        function debounce(func, wait) {
+            let timeout;
+            return function() {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, arguments), wait);
+            };
+        }
+
+        fetchMedicalNetwork();
+
+        map.on('moveend', debounce(() => {
+            fetchMedicalNetwork();
+        }, 500));
+
+        ['city', 'specialty', 'network'].forEach(id => {
+            document.getElementById(id)?.addEventListener('change', fetchMedicalNetwork);
+        });
+
+        document.getElementById('provider')?.addEventListener('input', debounce(() => {
+            fetchMedicalNetwork();
+        }, 600));
+
+        document.getElementById('provider-search-form')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            fetchMedicalNetwork();
+        });
+
+        // Dropdown Changes (City, Specialty, Network)
+        ['city', 'specialty', 'network'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('change', fetchMedicalNetwork);
+        });
+
+        // Name Search Debounce (Wait 500ms after typing)
+        let timer;
+        const nameInput = document.getElementById('provider');
+        if (nameInput) {
+            nameInput.addEventListener('input', () => {
+                clearTimeout(timer);
+                timer = setTimeout(fetchMedicalNetwork, 500);
+            });
+        }
+    </script>
+	<script is:inline src="/js/translations.js"></script>
+	<script is:inline src="/js/counter.js"></script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+---
+import MyFooter from '../components/MyFooter.astro';
+---
+<!DOCTYPE html>
+<html lang="en" class="page-careers">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedSure - Medical Insurance Services</title>
+    <meta name="description" content="Comprehensive medical insurance solutions designed to protect you and your family. Experience peace of mind with MedSure's trusted healthcare coverage.">
+    <link rel="stylesheet" href="/fonts/cairo/stylesheet.css">
+	<link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/contact.css">
+    <link rel="stylesheet" href="/css/services.css">
+    <link rel="stylesheet" href="/css/counter.css">
+    <link rel="stylesheet" href="/css/careers.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+	<!--<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232563eb'><path d='M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z'/></svg>">-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="headermain">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <img src="/images/logo_icon.png" alt="MedSure Logo" class="logo-img">
+                    </div>
+                    <!--<div class="logo-text">
+                        <h1>MedSure</h1>
+                        <p>Medical Services</p>
+                    </div> -->
+                </div>
+
+                <nav class="nav-desktop">
+                    <a href="/" data-i18n="nav.home">Home</a> | 
+                    <a href="/services" data-i18n="nav.services">Services</a>  | 
+                    <a href="/beneficiaries" data-i18n="nav.beneficiaries">Beneficiaries</a>  | 
+                    <a href="/medical-network" data-i18n="nav.medical_network">Medical network</a>  | 
+                    <!--<a href="/technology">Technology & Innovation</a>-->
+                    <a href="/about" data-i18n="nav.about">About Us</a>  | 
+                    <a href="/contact" data-i18n="nav.contact">Contact us</a>
+                </nav>
+
+                <div class="header-buttons">
+                    <!-- <button class="btn btn-outline">Find a Provider</button> 
+					<button class="btn btn-medical">Submit a Claim</button>-->
+
+					<a href="/medical-network" data-i18n="nav.find_provider" class="btn btn-medical">Find a Provider</a>
+					
+					<!--<a href="/medical-network" class="btn btn-outline">Find a Provider</a>
+					<a href="/submit-claim" class="btn btn-medical">Submit a Claim</a>-->
+                </div>
+
+                <!-- Language Selector -->
+                <div class="lang-selector">
+				
+				
+                    <button class="lang-button" type="button" aria-haspopup="true" aria-expanded="false" onclick="toggleLangMenu(event)">
+                        <span class="current-lang-label">EN</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m6 9 6 6 6-6"/>
+                        </svg>
+                    </button>
+                    <div class="lang-menu hidden" role="menu">
+                        <button class="lang-option" role="menuitemradio" aria-checked="true" data-lang="en" onclick="setLanguage('en')">
+                            <span class="check">✓</span>
+                            <span>English</span>
+                        </button>
+                        <button class="lang-option" role="menuitemradio" aria-checked="false" data-lang="ar" onclick="setLanguage('ar')">
+                            <span class="check">✓</span>
+                            <span>العربية</span>
+                        </button>
+                    </div>
+                </div>
+
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="4" x2="20" y1="6" y2="6"/>
+                        <line x1="4" x2="20" y1="12" y2="12"/>
+                        <line x1="4" x2="20" y1="18" y2="18"/>
+                    </svg>
+                    <svg class="close-icon hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m18 6-12 12"/>
+                        <path d="m6 6 12 12"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="mobile-menu hidden">
+                <nav class="mobile-nav">
+				    <a href="/" data-i18n="nav.home">Home</a>
+                    <a href="/services" data-i18n="nav.services">Services</a>
+                    <a href="/beneficiaries" data-i18n="nav.beneficiaries">Beneficiaries</a> 
+                    <a href="/medical-network" data-i18n="nav.medical_network">Medical network</a> 
+                    <!--<a href="/technology">Technology & Innovation</a>-->
+                    <a href="/about" data-i18n="nav.about">About Us</a> 
+                    <a href="/contact" data-i18n="nav.contact">Contact us</a>
+
+                    <div class="mobile-buttons">
+					<!-- <button class="btn btn-outline">Find a Provider</button> 
+					<button class="btn btn-medical">Submit a Claim</button>-->
+					
+					<a href="/medical-network" data-i18n="nav.find_provider" class="btn btn-medical">Find a Provider</a>
+					
+					<!-- <a href="/medical-network" class="btn btn-outline">Find a Provider</a>
+					<a href="/submit-claim" class="btn btn-medical">Submit a Claim</a> -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="careers-hero">
+            <div class="container">
+                <h1>Join Our Team</h1>
+                <p>Become part of MedSure and contribute to transforming healthcare administration</p>
+            </div>
+        </section>
+
+        <!-- Open Positions Section -->
+        <section class="open-positions">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Open Positions</h2>
+                    <p>Explore exciting career opportunities at MedSure</p>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="position-table">
+                        <thead>
+                            <tr>
+                                <th>Position</th>
+                                <th>Department</th>
+                                <th>Location</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="position-title">Medical Claims Officer</div>
+                                </td>
+                                <td class="department">Claims</td>
+                                <td class="location">
+                                    <i class="fas fa-map-marker-alt"></i> Cairo
+                                </td>
+                                <td>
+                                    <a href="#apply-now" class="apply-btn">
+                                        <i class="fas fa-paper-plane"></i> Apply Now
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="position-title">Network Coordinator</div>
+                                </td>
+                                <td class="department">Provider Network</td>
+                                <td class="location">
+                                    <i class="fas fa-map-marker-alt"></i> Cairo
+                                </td>
+                                <td>
+                                    <a href="#apply-now" class="apply-btn">
+                                        <i class="fas fa-paper-plane"></i> Apply Now
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="position-title">Call Center Agent</div>
+                                </td>
+                                <td class="department">Call Center</td>
+                                <td class="location">
+                                    <i class="fas fa-map-marker-alt"></i> Cairo
+                                </td>
+                                <td>
+                                    <a href="#apply-now" class="apply-btn">
+                                        <i class="fas fa-paper-plane"></i> Apply Now
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Application Section -->
+        <section id="apply-now" class="application-section">
+            <div class="application-container">
+                <div class="application-content">
+                    <h2>Join Medsure's Growing Team!</h2>
+                    <p>At MedSure, we're committed to excellence in healthcare administration. We value innovation, dedication, and a passion for making a difference in people's lives.</p>
+                    <p>When you join our team, you'll be part of a dynamic work environment that fosters professional growth and personal development.</p>
+                    <div class="highlights">
+                        <p><i class="fas fa-check-circle text-primary"></i> Competitive salaries and benefits</p>
+                        <p><i class="fas fa-check-circle text-primary"></i> Professional development opportunities</p>
+                        <p><i class="fas fa-check-circle text-primary"></i> Supportive work environment</p>
+                        <p><i class="fas fa-check-circle text-primary"></i> Opportunities for career advancement</p>
+                    </div>
+                </div>
+                
+                <div class="application-form">
+                    <h3>Apply Now</h3>
+                    <p>Fill out the form below to submit your application</p>
+                    
+                    <form id="career-application-form">
+                        <div class="form-group">
+                            <label for="full-name">Full Name *</label>
+                            <input type="text" id="full-name" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="position">Position Applying For *</label>
+                            <select id="position" class="form-control" required>
+                                <option value="">Select a position</option>
+                                <option value="Medical Claims Officer">Medical Claims Officer</option>
+                                <option value="Network Coordinator">Network Coordinator</option>
+                                <option value="Call Center Agent">Call Center Agent</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Upload CV/Resume *</label>
+                            <div class="file-upload">
+                                <label for="cv-upload" class="file-upload-btn">
+                                    <i class="fas fa-cloud-upload-alt"></i> Choose File
+                                </label>
+                                <input type="file" id="cv-upload" class="d-none" accept=".pdf,.doc,.docx">
+                                <span class="file-name">No file chosen</span>
+                            </div>
+                            <small class="text-muted">Accepted formats: PDF, DOC, DOCX (Max: 5MB)</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cover-letter">Cover Letter (Optional)</label>
+                            <textarea id="cover-letter" class="form-control" placeholder="Tell us why you'd be a great fit for this position..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-paper-plane"></i> Submit Application
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="email-application">
+                    <i class="fas fa-envelope-open-text"></i>
+                    <h3>Prefer to Email Us Directly?</h3>
+                    <p>Send your CV and cover letter to our HR department</p>
+                    <a href="mailto:hr@medsure.com.eg" class="email-link">
+                        <i class="fas fa-envelope"></i> hr@medsure.com.eg
+                    </a>
+                    <p class="mt-3">Please mention the position you're applying for in the subject line.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <!-- Footer -->
+    <MyFooter />
+    <!-- In the head section, add this before main.js -->
+	<script is:inline src="/js/translations.js"></script>
+	<script is:inline src="/js/main.js"></script>
+	<script is:inline src="/js/counter.js"></script>
+</body>
+</html>
