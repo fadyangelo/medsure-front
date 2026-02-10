@@ -1,5 +1,28 @@
 ---
 import MyFooter from '../components/MyFooter.astro';
+import { STRAPI_URL } from 'astro:env/server';
+
+
+const cookie = Astro.cookies.get('site_lang');
+const lang = cookie?.value ;//|| 'en';
+
+// 2. Map 'ar' to 'ar-EG' if your Strapi uses specific region codes
+const strapiLocale = lang === 'ar' ? 'ar-EG' : 'en';
+
+// 3. Construct the Dynamic Path
+// Note: We use &populate=* to ensure images/relations are returned
+// const STRAPI_URL2 = "http://localhost:1337"; // Or process.env.STRAPI_URL
+const sPath = `${STRAPI_URL}/api/services?locale=${strapiLocale}&populate=*`;
+
+
+
+async function getServicesData(){
+  const response = await fetch(sPath);
+  const data = await response.json() ;
+  return data.data[0];
+}
+
+const ServicesData = await getServicesData();
 ---
 <!DOCTYPE html>
 <html lang="en" class="page-services">
@@ -115,8 +138,8 @@ import MyFooter from '../components/MyFooter.astro';
         <!-- Hero Section -->
         <section class="services-hero">
             <div class="container">
-                <h1>Our Comprehensive Healthcare Solutions</h1>
-                <p>Delivering exceptional medical administration services with efficiency and care. Explore our range of specialized solutions tailored to meet your healthcare needs.</p>
+                <h1>{ServicesData.PageTitle}</h1>
+                <p>{ServicesData.PageDescription}</p>
             </div>
         </section>
 
@@ -126,113 +149,90 @@ import MyFooter from '../components/MyFooter.astro';
                 <!-- TPA Services -->
                 <div class="service-card collapsed">
                     <div class="service-icon">
-                        <img src="/images/TPA.jpg" alt="TPA Services" />
+                        <img src={`${STRAPI_URL}${ServicesData.TPAServices_FeatureImage?.url}`} alt="TPA Services" />
                     </div>
                     <div class="service-content">
-                        <h2>TPA Services</h2>
+                        <h2>{ServicesData.TPAServices.Title}</h2>
                         <div class="service-details">
-                            <p>We handle the full medical claims journey on behalf of insurers and corporates — from approvals to reimbursements. Our systems are fast, our team is responsive, and we make sure members get the care they need without any hassle.</p>
-                            <ul class="service-features">
-                                <li>Coverage across a diverse network of medical providers</li>
-                                <li>Competitive contractual discounts</li>
-                                <li>24/7 medical pre-approvals and emergency support</li>
-                                <li>Call center and live support channels</li>
-                                <li>End-to-end claims processing and DOS (Date of Service) services.</li>
-                                <li>Roving doctors for on-site medical review.</li>
-                                <li>Provider reimbursement and settlement services.</li>
-                                <li>Management of member additions, deletions, and eligibility.</li>
-                                <li>Coordination of medical authorizations and treatment plans.</li>
-                            </ul>
+                            <p set:html={ServicesData.TPAServices.Description}></p>
                         </div>
                         <button class="show-more" type="button">Show more</button>
                     </div>
-                    <a href="/contact" class="cta-button">Request a Proposal</a>
+                    <a href={ServicesData.TPAServices.BtnLink} class="cta-button">{ServicesData.TPAServices.BtnName}</a>
                 </div>
 
                 <!-- Self-Funded Programs -->
                 <div class="service-card collapsed">
                     <div class="service-icon"> 
-                        <img src="/images/SELF FUNDED.png" alt="Self-Funded Programs" />
+                        <img src={`${STRAPI_URL}${ServicesData.SelfFundedPrograms_FeatureImage?.url}`} alt="Self-Funded Programs" />
                     </div>
                     <div class="service-content">
-                        <h2>Self-Funded Programs</h2>
+                        <h2>{ServicesData.SelfFundedPrograms.Title}</h2>
                         <div class="service-details">
-                            <p>For companies that fund their own healthcare plans, we manage everything: provider access, approvals, claims, reports, and spending insights. It's flexible, cost-effective, and built to fit your team.</p>
-                            <ul class="service-features">
-                                <li>Access to our network with discounted pricing</li>
-                                <li>Real-time support from our call center</li>
-                                <li>Digital claims processing and medical auditing</li>
-                                <li>Cost containment and utilization review tools</li>
-                            </ul>
+                            <p set:html={ServicesData.SelfFundedPrograms.Description}></p>
+                    
                         </div>
                         <button class="show-more" type="button">Show more</button>
                     </div>
-                    <a href="/contact" class="cta-button">Learn More</a>
+                    <a href={ServicesData.SelfFundedPrograms.BtnLink} class="cta-button">{ServicesData.SelfFundedPrograms.BtnName}</a>
                 </div>
 
                 <!-- Cash / Discount Cards -->
                 <div class="service-card collapsed">
                     <div class="service-icon">
-                        <img src="/images/Cash_cards.jpeg" alt="Cash / Discount Cards" />
+                        <img src={`${STRAPI_URL}${ServicesData.CashDiscountCards_FeatureImage?.url}`} alt="Cash / Discount Cards" />
                     </div>
                     <div class="service-content">
-                        <h2>Cash / Discount Cards</h2>
+                        <h2>{ServicesData.CashDiscountCards.Title}</h2>
                         <div class="service-details">
-                            <p>We offer medical cards that give access to thousands of trusted providers at discounted rates.</p>
-                            <ul class="service-features">
-                                <li>Cash Cards: let members pay directly at lower prices.</li>
-                                <li>Prepaid Cards: cover services up to a certain limit. These cards are accepted at clinics, pharmacies, labs, and more — all across Egypt.</li>
-                            </ul>
+                            <p set:html={ServicesData.CashDiscountCards.Description}></p>
+                            
                         </div>
                         <button class="show-more" type="button">Show more</button>
                     </div>
-                    <a href="/contact" class="cta-button">Get Your Card</a>
+                    <a href={ServicesData.CashDiscountCards.BtnLink} class="cta-button">{ServicesData.CashDiscountCards.BtnName}</a>
                 </div>
 
                 <!-- Pre-Insurance & Employment Checkups -->
                 <div class="service-card collapsed">
                     <div class="service-icon">
-                        <img src="/images/PREINSURENCE CHECK UP.jpg" alt="Pre-Insurance & Employment Checkups" />
+                        <img src={`${STRAPI_URL}${ServicesData.PreInsuranceEmploymentCheckups_FeatureImage?.url}`} alt="Pre-Insurance & Employment Checkups" />
                     </div>
                     <div class="service-content">
-                        <h2>Pre-Insurance & Employment Checkups</h2>
+                        <h2>{ServicesData.PreInsuranceEmploymentCheckups.Title}</h2>
                         <div class="service-details">
-                            <p>We organize medical screening for new employees or insurance applicants — fast, standardized, and compliant with your policy needs.</p>
-                            <ul class="service-features">
-                                <li>Comprehensive check-up packages at discounted rates.</li>
-                                <li>Standardized reports for insurance underwriting or hiring purposes.</li>
-                                <li>Oversight by qualified physicians to ensure accuracy and quality.</li>
-                            </ul>
+                            <p set:html={ServicesData.PreInsuranceEmploymentCheckups.Description}></p>
+                        
                         </div>
                         <button class="show-more" type="button">Show more</button>
                     </div>
-                    <a href="/contact" class="cta-button">Schedule Checkup</a>
+                    <a href={ServicesData.PreInsuranceEmploymentCheckups.BtnLink} class="cta-button">{ServicesData.PreInsuranceEmploymentCheckups.BtnName}</a>
                 </div>
 
                 <!-- Patient Support Programs -->
                 <div class="service-card collapsed">
                     <div class="service-icon">
-                        <img src="/images/Patient_support_programs.jpeg" alt="Patient Support Programs" />
+                        <img src={`${STRAPI_URL}${ServicesData.PatientSupportPrograms_FeatureImage?.url}`} alt="Patient Support Programs" />
                     </div>
                     <div class="service-content">
-                        <h2>Patient Support Programs</h2>
+                        <h2>{ServicesData.PatientSupportPrograms.Title}</h2>
                         <div >
-                            <p>We help patients manage long-term or complex conditions by supporting them with reminders, refills, and clear communication. These programs are built to make treatment easier and more consistent.</p>
+                            <p set:html={ServicesData.PatientSupportPrograms.Description}></p>
                         </div>
                         <!--<button class="show-more" type="button">Show more</button>-->
                     </div>
-                    <a href="/contact" class="cta-button">Get Support</a>
+                    <a href={ServicesData.PatientSupportPrograms.BtnLink} class="cta-button">{ServicesData.PatientSupportPrograms.BtnName}</a>
                 </div>
 
                 <!-- Drug Detection Campaigns -->
                 <div class="service-card collapsed">
                     <div class="service-icon">
-                        <img src="/images/medical-technology.jpg" alt="Drug Detection Campaigns" />
+                        <img src={`${STRAPI_URL}${ServicesData.DrugDetectionCampaigns_FeatureImage?.url}`} alt="Drug Detection Campaigns" />
                     </div>
                     <div class="service-content">
-                        <h2>Drug Detection Campaigns</h2>
+                        <h2>{ServicesData.DrugDetectionCampaigns.Title}</h2>
                         <div >
-                            <p>We help employers promote safer workplaces by managing on-site drug testing — confidential, compliant, and handled with medical accuracy and respect.</p>
+                            <p set:html={ServicesData.DrugDetectionCampaigns.Description}></p>
                             <!--<p>All services include:</p>
                             <ul class="service-features">
                                 <li>Smart claim processing</li>
@@ -244,7 +244,7 @@ import MyFooter from '../components/MyFooter.astro';
                         </div>
                         <!--<button class="show-more" type="button">Show more</button> -->
                     </div>
-                    <a href="/contact" class="cta-button">Request Information</a>
+                    <a href={ServicesData.DrugDetectionCampaigns.BtnLink} class="cta-button">{ServicesData.DrugDetectionCampaigns.BtnName}</a>
                 </div>
             </div>
         </section>
@@ -252,9 +252,9 @@ import MyFooter from '../components/MyFooter.astro';
         <!-- CTA Section -->
         <section style="background: #f8fafc; padding: 5rem 0; text-align: center;">
             <div class="container">
-                <h2 style="color: var(--color-trust-blue); margin-bottom: 1.5rem;">Ready to Get Started?</h2>
+                <h2 style="color: var(--color-trust-blue); margin-bottom: 1.5rem;">{ServicesData.EndTitle}</h2>
                 <p style="max-width: 700px; margin: 0 auto 2rem; font-size: 1.1rem; color: var(--color-foreground);">
-                    Our team is ready to help you find the perfect healthcare solution for your needs. Contact us today to learn more about our services.
+                   {ServicesData.EndDescription}
                 </p>
                 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                     <a href="/contact" class="cta-button">Request a Call</a>
