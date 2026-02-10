@@ -1,5 +1,28 @@
 ---
 import MyFooter from '../components/MyFooter.astro';
+import { STRAPI_URL } from 'astro:env/server';
+
+
+const cookie = Astro.cookies.get('site_lang');
+const lang = cookie?.value ;//|| 'en';
+
+// 2. Map 'ar' to 'ar-EG' if your Strapi uses specific region codes
+const strapiLocale = lang === 'ar' ? 'ar-EG' : 'en';
+
+// 3. Construct the Dynamic Path
+// Note: We use &populate=* to ensure images/relations are returned
+// const STRAPI_URL2 = "http://localhost:1337"; // Or process.env.STRAPI_URL
+const sPath = `${STRAPI_URL}/api/contact-uses?locale=${strapiLocale}&populate=*`;
+
+
+
+async function getContactUsData(){
+  const response = await fetch(sPath);
+  const data = await response.json() ;
+  return data.data[0];
+}
+
+const ContactUsData = await getContactUsData();
 ---
 <!DOCTYPE html>
 <html lang="en" class="page-contact">
@@ -115,8 +138,8 @@ import MyFooter from '../components/MyFooter.astro';
         <!-- Page Header -->
         <section class="page-header">
             <div class="container">
-                <h1>Contact Us</h1>
-                <p>Get in touch with our team for any inquiries or support</p>
+                <h1>{ContactUsData.PageTitle}</h1>
+                <p>{ContactUsData.PageDescription}</p>
             </div>
         </section>
         
@@ -126,8 +149,8 @@ import MyFooter from '../components/MyFooter.astro';
                 <div class="contact-wrapper">
                     <!-- Contact Information -->
                     <div class="contact-info">
-                        <h2>Get in Touch</h2>
-                        <p>Our team is here to assist you with any questions or concerns you may have. Reach out to us through any of the following channels:</p>
+                        <h2>{ContactUsData.Title}</h2>
+                        <p>{ContactUsData.Description}</p>
                         
                         <div class="contact-methods">
                             <div class="contact-method">
@@ -135,9 +158,9 @@ import MyFooter from '../components/MyFooter.astro';
                                     <i class="fas fa-phone-alt"></i>
                                 </div>
                                 <div class="contact-details">
-                                    <h3>Phone</h3>
-									<p><a href="tel:17672">17672</a></p>
-									<p><a href="tel:0221277888">02-21277888</a></p>
+                                    <h3>{ContactUsData.PhoneNumber}</h3>
+									<p><a href=`tel:${ContactUsData.Phone1}`>{ContactUsData.Phone1}</a></p>
+									<p><a href=`tel:${ContactUsData.Phone2}`>{ContactUsData.Phone2}</a></p>
 									
                                     <!--<p><a href="tel:0221277888">02-21277888</a></p>
                                     <p><a href="tel:01288621773">01288621773</a></p>
@@ -149,11 +172,12 @@ import MyFooter from '../components/MyFooter.astro';
                                 <div class="contact-icon">
                                     <i class="fas fa-envelope"></i>
                                 </div>
-                                <div class="contact-details">
-                                    <h3>Email</h3>
-                                    <p><a href="mailto:info@medsure.com.eg">info@medsure.com.eg</a></p>
-                                    <p><a href="mailto:CS@medsure.com.eg">CS@medsure.com.eg</a></p>
-                                </div>
+                              <div class="contact-details">
+  <h3>{ContactUsData.Email}</h3>
+  <p><a href={`mailto:${ContactUsData.Email1}`}>{ContactUsData.Email1}</a></p>
+  <p><a href={`mailto:${ContactUsData.Email2}`}>{ContactUsData.Email2}</a></p>
+</div>
+
                             </div>
                             
                             <div class="contact-method">
@@ -161,8 +185,8 @@ import MyFooter from '../components/MyFooter.astro';
                                     <i class="fas fa-map-marker-alt"></i>
                                 </div>
                                 <div class="contact-details">
-                                    <h3>Location</h3>
-                                    <p>15 El-Bostan St., Sheraton El-Matar,<br>Heliopolis, Cairo, Egypt</p>
+                                    <h3>{ContactUsData.Location}</h3>
+                                    <p>{ContactUsData.AddressLink}</p>
                                 </div>
                             </div>
                             
@@ -171,9 +195,8 @@ import MyFooter from '../components/MyFooter.astro';
                                     <i class="fas fa-clock"></i>
                                 </div>
                                 <div class="contact-details">
-                                    <h3>Working Hours</h3>
-                                    <p>Sunday - Thursday: 9:00 AM - 5:00 PM</p>
-                                    <p>Friday & Saturday: Closed</p>
+                                    <h3>{ContactUsData.WorkingHours}</h3>
+                                    <p>{ContactUsData.WorkingHoursDescription}</p>
                                 </div>
                             </div>
                         </div>
