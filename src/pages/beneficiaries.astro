@@ -1,5 +1,29 @@
 ---
 import MyFooter from '../components/MyFooter.astro';
+import { STRAPI_URL } from 'astro:env/server';
+
+
+const cookie = Astro.cookies.get('site_lang');
+const lang = cookie?.value ;//|| 'en';
+
+// 2. Map 'ar' to 'ar-EG' if your Strapi uses specific region codes
+const strapiLocale = lang === 'ar' ? 'ar-EG' : 'en';
+
+// 3. Construct the Dynamic Path
+// Note: We use &populate=* to ensure images/relations are returned
+// const STRAPI_URL2 = "http://localhost:1337"; // Or process.env.STRAPI_URL
+const sPath = `${STRAPI_URL}/api/beneficiaries?locale=${strapiLocale}&populate=*`;
+
+
+
+async function getBeneficiariesData(){
+  const response = await fetch(sPath);
+  const data = await response.json() ;
+  return data.data[0];
+}
+
+const BeneficiariesData = await getBeneficiariesData();
+
 ---
 <!DOCTYPE html>
 <html lang="en" class="page-beneficiaries">
@@ -117,8 +141,8 @@ import MyFooter from '../components/MyFooter.astro';
         <!-- Hero Section -->
         <section class="beneficiaries-hero">
             <div class="container">
-                <h1>Your Health Journey, Simplified</h1>
-                <p>Access your healthcare benefits with ease through our comprehensive digital platform designed just for you.</p>
+                <h1>{BeneficiariesData.PageTitle}</h1>
+                <p>{BeneficiariesData.PageDescription}</p>
             </div>
         </section>
 
@@ -126,12 +150,17 @@ import MyFooter from '../components/MyFooter.astro';
         <section class="video-section">
             <div class="video-container">
                 <div class="section-header">
-                    <h2>How to Use MedSure Services</h2>
-                    <p>Watch our tutorial video to learn how to make the most of your MedSure benefits</p>
+                    <h2>{BeneficiariesData.Title1}</h2>
+                    <p>{BeneficiariesData.Description1}</p>
                 </div>
                 <div class="video-wrapper">
                     <!-- Replace with your actual video embed code -->
-                    <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe 
+  src={BeneficiariesData.YoutubeVideoURL}
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen>
+</iframe>
                 </div>
             </div>
         </section>
@@ -140,23 +169,25 @@ import MyFooter from '../components/MyFooter.astro';
         <section class="benefits-section">
             <div class="container">
                 <div class="benefits-header">
-                    <h2>Benefits for Members</h2>
-                    <p>Take control of your healthcare with our easy-to-use member portal and mobile app</p>
+                    <h2>{BeneficiariesData.Title2}</h2>
+                    <p>{BeneficiariesData.Description2}</p>
                 </div>
                 
                 <div class="benefits-grid">
                     <div class="benefit-card">
                         <div class="benefit-icon">
-                            <img src="/images/submit_a_claim.jpg" alt="Submit Claims">
+                            <img 
+  src={`${STRAPI_URL}${BeneficiariesData.RequestApproval_FeatureImage?.url}`}
+                             alt="Submit Claims">
 							<!--<i class="fas fa-file-upload"></i>-->
                         </div>
-                        <h3>Request approval</h3>
-                        <p>Quickly and easily submit your medical claims request through our secure mobile app.</p>
+                        <h3>{BeneficiariesData.RequestApproval.Title}</h3>
+                        <p>{BeneficiariesData.RequestApproval.Description}</p>
                       
-						 <a href="https://wa.me/201288621773" class="download-btn" target="_blank">
+						 <a href={BeneficiariesData.RequestApproval.BtnLink} class="download-btn" target="_blank">
 						 
                             <!-- <i class="fas fa-download"></i> -->
-							<i class="fas fa-book"></i> Request approval
+							<i class="fas fa-book"></i> {BeneficiariesData.RequestApproval.BtnName}
                         </a>
 						<!--<a href="#" class="download-btn">
                             <i class="fab fa-apple"></i> Download App
@@ -166,23 +197,27 @@ import MyFooter from '../components/MyFooter.astro';
                     <div class="benefit-card">
                         <div class="benefit-icon">
                             <!--<i class="fas fa-map-marker-alt"></i>-->
-							<img src="/images/medical_network.jpg" alt="Medical network">
+							<img 
+  src={`${STRAPI_URL}${BeneficiariesData.FindNetworkProviders_FeatureImage?.url}`}
+                             alt="Medical network">
                         </div>
-                        <h3>Find Network Providers</h3>
-                        <p>Locate nearby healthcare providers in our extensive network with just a few clicks.</p>
-                        <a href="/medical-network" class="download-btn">
-                            <i class="fas fa-search"></i> Find Providers
+                                               <h3>{BeneficiariesData.FindNetworkProviders.Title}</h3>
+                        <p>{BeneficiariesData.FindNetworkProviders.Description}</p>
+                        <a href={BeneficiariesData.FindNetworkProviders.BtnLink} class="download-btn">
+                            <i class="fas fa-search"></i> {BeneficiariesData.FindNetworkProviders.BtnName}
                         </a>
                     </div>
                     
 					<div class="benefit-card">
                         <div class="benefit-icon">
-							<img src="/images/telesales_consultants.jpeg" alt="Telehealth consultations">
+							<img 
+  src={`${STRAPI_URL}${BeneficiariesData.TeleConsultations_FeatureImage?.url}`}
+                             alt="Telehealth consultations">
                         </div>
-                        <h3>Tele consultations</h3>
-                        <p>Get quick pre-approvals for medical procedures through our mobile app, saving you time and hassle.</p>
-                        <a href="tel:201288621773" class="download-btn">
-                            <i class="fa-solid fa-phone"></i> Start your call
+                                                                     <h3>{BeneficiariesData.TeleConsultations.Title}</h3>
+                        <p>{BeneficiariesData.TeleConsultations.Description}</p>
+                        <a href={BeneficiariesData.TeleConsultations.BtnLink} class="download-btn">
+                            <i class="fa-solid fa-phone"></i> {BeneficiariesData.TeleConsultations.BtnName}
                         </a>
                     </div>
                     <!--<div class="benefit-card">
