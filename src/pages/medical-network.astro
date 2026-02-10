@@ -1,10 +1,36 @@
 ---
 import MyFooter from '../components/MyFooter.astro';
+// import { STRAPI_URL } from 'astro:env/server';
+
+// // We only use the server variable here to pass it to the client if needed, 
+// // but we will stick to the specific URL provided in your request.
+// const medicalNetwork_APIPath = `${STRAPI_URL}/api/medical-network`;
+
+
+
 import { STRAPI_URL } from 'astro:env/server';
 
-// We only use the server variable here to pass it to the client if needed, 
-// but we will stick to the specific URL provided in your request.
-const medicalNetwork_APIPath = `${STRAPI_URL}/api/medical-network`;
+
+const cookie = Astro.cookies.get('site_lang');
+const lang = cookie?.value ;//|| 'en';
+
+// 2. Map 'ar' to 'ar-EG' if your Strapi uses specific region codes
+const strapiLocale = lang === 'ar' ? 'ar-EG' : 'en';
+
+// 3. Construct the Dynamic Path
+// Note: We use &populate=* to ensure images/relations are returned
+// const STRAPI_URL2 = "http://localhost:1337"; // Or process.env.STRAPI_URL
+const sPath = `${STRAPI_URL}/api/medical-network-pages?locale=${strapiLocale}&populate=*`;
+
+
+
+async function getMedicalData(){
+  const response = await fetch(sPath);
+  const data = await response.json() ;
+  return data.data[0];
+}
+
+const MedicalData = await getMedicalData();
 ---
 
 <!DOCTYPE html>
@@ -273,8 +299,8 @@ const medicalNetwork_APIPath = `${STRAPI_URL}/api/medical-network`;
         <!-- Hero Section -->
         <section class="network-hero">
             <div class="container">
-                <h1>Find a Healthcare Provider</h1>
-                <p>Search our network of trusted healthcare providers across Egypt</p>
+                <h1>{MedicalData.PageTitle}</h1>
+                <p>{MedicalData.PageDescription}</p>
             </div>
         </section>
 
@@ -398,76 +424,78 @@ const medicalNetwork_APIPath = `${STRAPI_URL}/api/medical-network`;
         </section>
 
         <!-- Stats Section -->
-        <section class="stats-section">
-            <div class="stats-container">
-                <div class="section-header">
-                    <h2>Our Network at a Glance</h2>
-                    <p>Trusted by thousands across Egypt</p>
-                </div>
-                
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <!-- THIS ID WILL SHOW "99+" -->
-                        <div class="stat-number" id="visible-providers-count">0</div>
-                        <div class="stat-label">Providers in View</div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-number">27</div>
-                        <div class="stat-label">Governorates Covered</div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-number">98%</div>
-                        <div class="stat-label">Approval Rate</div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-number">24/7</div>
-                        <div class="stat-label">Medical Support</div>
-                    </div>
-                </div>
-                
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <h3><i class="fas fa-network-wired"></i> Comprehensive Network</h3>
-                        <ul>
-                            <li>Weekly updated directory</li>
-                            <li>Full specialty coverage</li>
-                            <li>Graded network (A++, A+, A)</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <h3><i class="fas fa-headset"></i> Real Medical Support</h3>
-                        <p>Our call center is staffed by trained medical professionals, ready to assist with approvals, questions, or emergencies anytime.</p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <h3><i class="fas fa-bolt"></i> Fast Approvals & Claims</h3>
-                        <ul>
-                            <li>98% of outpatient approvals in under 10 minutes</li>
-                            <li>Reimbursements processed within 5–14 working days</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <h3><i class="fas fa-building"></i> Employer Solutions</h3>
-                        <p>We support both insured and self-funded models, with real-time dashboards, cost tracking, and custom reporting tools.</p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <h3><i class="fas fa-id-card"></i> Smart Medical Cards</h3>
-                        <p>Whether it's a cash, prepaid, or insurance card — members get access to discounted rates, fast approvals, and a smooth experience every time.</p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <h3><i class="fas fa-hands-helping"></i> On-the-Ground Support</h3>
-                        <p>We offer roving doctors, doctor-on-site (DOS) visits, and in-house network communication to resolve issues on the spot.</p>
-                    </div>
-                </div>
+   <!-- Stats Section -->
+<section class="stats-section">
+    <div class="stats-container">
+        <div class="section-header">
+            <h2>{MedicalData.Title}</h2>
+            <p>{MedicalData.Description}</p>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <!-- THIS ID WILL SHOW "99+" -->
+                <div class="stat-number" id="visible-providers-count">{MedicalData.ProvidersInView.KeyNumber}</div>
+                <div class="stat-label">{MedicalData.ProvidersInView.KeyText}</div>
             </div>
-        </section>
+            
+            <div class="stat-card">
+                <div class="stat-number">{MedicalData.GovernoratesCovered.KeyNumber}</div>
+                <div class="stat-label">{MedicalData.GovernoratesCovered.KeyText}</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-number">{MedicalData.ApprovalRate.KeyNumber}</div>
+                <div class="stat-label">{MedicalData.ApprovalRate.KeyText}</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-number">{MedicalData.MedicalSupport.KeyNumber}</div>
+                <div class="stat-label">{MedicalData.MedicalSupport.KeyText}</div>
+            </div>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3><i class="fas fa-network-wired"></i> {MedicalData.ComprehensiveNetwork.title}</h3>
+                <ul>
+                    <li>{MedicalData.ComprehensiveNetwork.body.split('\n')[0]}</li>
+                    <li>{MedicalData.ComprehensiveNetwork.body.split('\n')[1]}</li>
+                    <li>{MedicalData.ComprehensiveNetwork.body.split('\n')[2]}</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card">
+                <h3><i class="fas fa-headset"></i> {MedicalData.RealMedicalSupport.title}</h3>
+                <p>{MedicalData.RealMedicalSupport.body}</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3><i class="fas fa-bolt"></i> {MedicalData.FastApprovalsClaims.title}</h3>
+                <ul>
+                    <li>{MedicalData.FastApprovalsClaims.body.split('\n')[0]}</li>
+                    <li>{MedicalData.FastApprovalsClaims.body.split('\n')[1]}</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card">
+                <h3><i class="fas fa-building"></i> {MedicalData.EmployerSolutions.title}</h3>
+                <p>{MedicalData.EmployerSolutions.body}</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3><i class="fas fa-id-card"></i> {MedicalData.SmartMedicalCards.title}</h3>
+                <p>{MedicalData.SmartMedicalCards.body}</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3><i class="fas fa-hands-helping"></i> {MedicalData.OnTheGroundSupport.title}</h3>
+                <p>{MedicalData.OnTheGroundSupport.body}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
         
         <!-- Provider Form Section -->
         <section class="provider-form-section">
