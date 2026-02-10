@@ -2,387 +2,397 @@
 
 /* Hero Section */
 .careers-hero {
-    background: linear-gradient(135deg, rgba(33, 150, 243, 0.9), rgba(13, 71, 161, 0.9)), 
-                url('../images/careers-bg.jpg') center/cover no-repeat;
-    color: white;
-    padding: 8rem 0;
-    text-align: center;
-    min-height: 50vh;
-    display: flex;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(33, 150, 243, 0.9), rgba(13, 71, 161, 0.9)),
+    url("../images/careers-bg.jpg") center/cover no-repeat;
+  color: white;
+  padding: 8rem 0;
+  text-align: center;
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .careers-hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
 }
 
 .careers-hero .container {
-    position: relative;
-    z-index: 2;
-    max-width: 800px;
-    margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .careers-hero h1 {
-    font-size: var(--font-size-5xl);
-    margin-bottom: var(--spacing-4);
-    font-weight: 800;
-    line-height: 1.2;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: var(--font-size-5xl);
+  margin-bottom: var(--spacing-4);
+  font-weight: 800;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .careers-hero p {
-    font-size: var(--font-size-xl);
-    max-width: 800px;
-    margin: 0 auto;
-    opacity: 0.95;
-    line-height: 1.7;
-    font-weight: 300;
+  font-size: var(--font-size-xl);
+  max-width: 800px;
+  margin: 0 auto;
+  opacity: 0.95;
+  line-height: 1.7;
+  font-weight: 300;
 }
 
 /* Open Positions Section */
 .open-positions {
-    padding: var(--spacing-20) 0;
-    background-color: var(--white);
+  padding: var(--spacing-20) 0;
+  background-color: var(--white);
 }
 
 .open-positions .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--spacing-4);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-4);
 }
 
 .section-header {
-    text-align: center;
-    margin-bottom: var(--spacing-12);
+  text-align: center;
+  margin-bottom: var(--spacing-12);
 }
 
 .section-header h2 {
-    font-size: var(--font-size-4xl);
-    color: var(--text-dark);
-    margin-bottom: var(--spacing-2);
+  font-size: var(--font-size-4xl);
+  color: var(--text-dark);
+  margin-bottom: var(--spacing-2);
 }
 
 .section-header p {
-    color: var(--text-light);
-    font-size: var(--font-size-lg);
-    max-width: 700px;
-    margin: 0 auto;
+  color: var(--text-light);
+  font-size: var(--font-size-lg);
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 .position-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: var(--spacing-8) 0;
-    box-shadow: var(--shadow-md);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--spacing-8) 0;
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
 }
 
 .position-table thead {
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-    color: white;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--primary-dark)
+  );
+  color: white;
 }
 
 .position-table th {
-    padding: var(--spacing-4) var(--spacing-6);
-    text-align: left;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: var(--font-size-sm);
-    letter-spacing: 0.5px;
+  padding: var(--spacing-4) var(--spacing-6);
+  text-align: left;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.5px;
 }
 
 .position-table tbody tr {
-    border-bottom: 1px solid var(--color-border);
-    transition: background-color 0.2s ease;
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color 0.2s ease;
 }
 
 .position-table tbody tr:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .position-table tbody tr:hover {
-    background-color: rgba(33, 150, 243, 0.05);
+  background-color: rgba(33, 150, 243, 0.05);
 }
 
 .position-table td {
-    padding: var(--spacing-5) var(--spacing-6);
-    vertical-align: middle;
+  padding: var(--spacing-5) var(--spacing-6);
+  vertical-align: middle;
 }
 
 .position-table .position-title {
-    font-weight: 600;
-    color: var(--text-dark);
-    font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--text-dark);
+  font-size: var(--font-size-lg);
 }
 
 .position-table .department {
-    color: var(--text-light);
-    font-size: var(--font-size-base);
+  color: var(--text-light);
+  font-size: var(--font-size-base);
 }
 
 .position-table .location {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-2);
-    color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  color: var(--text-light);
 }
 
 .position-table .location i {
-    color: var(--primary-color);
+  color: var(--primary-color);
 }
 
 .apply-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-2);
-    background: var(--primary-color);
-    color: white;
-    padding: var(--spacing-2) var(--spacing-4);
-    border-radius: var(--radius-md);
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    border: none;
-    cursor: pointer;
-    font-size: var(--font-size-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  background: var(--primary-color);
+  color: white;
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-size: var(--font-size-sm);
 }
 
 .apply-btn:hover {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
 }
 
 .apply-btn i {
-    font-size: 1.1em;
+  font-size: 1.1em;
 }
 
 /* Application Section */
 .application-section {
-    background-color: var(--light-bg);
-    padding: var(--spacing-20) 0;
+  background-color: var(--light-bg);
+  padding: var(--spacing-20) 0;
 }
 
 .application-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--spacing-4);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-12);
-    align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-4);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-12);
+  align-items: center;
 }
 
 .application-content h2 {
-    font-size: var(--font-size-4xl);
-    color: var(--text-dark);
-    margin-bottom: var(--spacing-6);
-    line-height: 1.3;
+  font-size: var(--font-size-4xl);
+  color: var(--text-dark);
+  margin-bottom: var(--spacing-6);
+  line-height: 1.3;
 }
 
 .application-content p {
-    color: var(--text-light);
-    line-height: 1.8;
-    margin-bottom: var(--spacing-6);
+  color: var(--text-light);
+  line-height: 1.8;
+  margin-bottom: var(--spacing-6);
 }
 
 .application-form {
-    background: white;
-    padding: var(--spacing-8);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
+  background: white;
+  padding: var(--spacing-8);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
 }
 
 .form-group {
-    margin-bottom: var(--spacing-6);
+  margin-bottom: var(--spacing-6);
 }
 
 .form-group label {
-    display: block;
-    margin-bottom: var(--spacing-2);
-    font-weight: 500;
-    color: var(--text-dark);
+  display: block;
+  margin-bottom: var(--spacing-2);
+  font-weight: 500;
+  color: var(--text-dark);
 }
 
 .form-control {
-    width: 100%;
-    padding: var(--spacing-3) var(--spacing-4);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    font-size: var(--font-size-base);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  padding: var(--spacing-3) var(--spacing-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .form-control:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
 }
 
 textarea.form-control {
-    min-height: 120px;
-    resize: vertical;
+  min-height: 120px;
+  resize: vertical;
 }
 
 .file-upload {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-3);
-    padding: var(--spacing-3) 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) 0;
 }
 
 .file-upload-btn {
-    background: var(--light-bg);
-    border: 1px dashed var(--color-border);
-    padding: var(--spacing-2) var(--spacing-4);
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-2);
+  background: var(--light-bg);
+  border: 1px dashed var(--color-border);
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
 }
 
 .file-upload-btn:hover {
-    background: rgba(33, 150, 243, 0.05);
-    border-color: var(--primary-color);
+  background: rgba(33, 150, 243, 0.05);
+  border-color: var(--primary-color);
 }
 
 .file-name {
-    font-size: var(--font-size-sm);
-    color: var(--text-light);
+  font-size: var(--font-size-sm);
+  color: var(--text-light);
 }
 
 .btn-submit {
-    width: 100%;
-    padding: var(--spacing-3);
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: var(--radius-md);
-    font-size: var(--font-size-base);
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: var(--spacing-2);
+  width: 100%;
+  padding: var(--spacing-3);
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: var(--spacing-2);
 }
 
 .btn-submit:hover {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
 }
 
 /* Email Application */
 .email-application {
-    text-align: center;
-    padding: var(--spacing-8);
-    background: white;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-    margin-top: var(--spacing-8);
+  text-align: center;
+  padding: var(--spacing-8);
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  margin-top: var(--spacing-8);
 }
 
 .email-application i {
-    font-size: 3rem;
-    color: var(--primary-color);
-    margin-bottom: var(--spacing-4);
+  font-size: 3rem;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-4);
 }
 
 .email-application h3 {
-    font-size: var(--font-size-2xl);
-    color: var(--text-dark);
-    margin-bottom: var(--spacing-2);
+  font-size: var(--font-size-2xl);
+  color: var(--text-dark);
+  margin-bottom: var(--spacing-2);
 }
 
 .email-application p {
-    color: var(--text-light);
-    margin-bottom: var(--spacing-4);
+  color: var(--text-light);
+  margin-bottom: var(--spacing-4);
 }
 
 .email-link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-2);
-    color: var(--primary-color);
-    font-weight: 600;
-    text-decoration: none;
-    font-size: var(--font-size-lg);
-    transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  color: var(--primary-color);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: var(--font-size-lg);
+  transition: all 0.3s ease;
 }
 
 .email-link:hover {
-    color: var(--primary-dark);
-    text-decoration: underline;
+  color: var(--primary-dark);
+  text-decoration: underline;
 }
 
 /* Responsive Styles */
 @media (max-width: 992px) {
-    .application-container {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-8);
-    }
-    
-    .application-content {
-        text-align: center;
-    }
-    
-    .email-application {
-        max-width: 500px;
-        margin: var(--spacing-8) auto 0;
-    }
+  .application-container {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-8);
+  }
+
+  .application-content {
+    text-align: center;
+  }
+
+  .email-application {
+    max-width: 500px;
+    margin: var(--spacing-8) auto 0;
+  }
 }
 
 @media (max-width: 768px) {
-    .careers-hero {
-        padding: 6rem 0;
-        min-height: 60vh;
-    }
-    
-    .careers-hero h1 {
-        font-size: var(--font-size-4xl);
-    }
-    
-    .section-header h2 {
-        font-size: var(--font-size-3xl);
-    }
-    
-    .position-table {
-        display: block;
-        overflow-x: auto;
-    }
-    
-    .position-table th,
-    .position-table td {
-        padding: var(--spacing-3) var(--spacing-4);
-    }
+  .careers-hero {
+    padding: 6rem 0;
+    min-height: 60vh;
+  }
+
+  .careers-hero h1 {
+    font-size: var(--font-size-4xl);
+  }
+
+  .section-header h2 {
+    font-size: var(--font-size-3xl);
+  }
+
+  .position-table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .position-table th,
+  .position-table td {
+    padding: var(--spacing-3) var(--spacing-4);
+  }
 }
 
 @media (max-width: 480px) {
-    .careers-hero h1 {
-        font-size: var(--font-size-3xl);
-    }
-    
-    .careers-hero p {
-        font-size: var(--font-size-lg);
-    }
-    
-    .section-header h2 {
-        font-size: var(--font-size-2xl);
-    }
-    
-    .application-content h2 {
-        font-size: var(--font-size-2xl);
-    }
+  .careers-hero h1 {
+    font-size: var(--font-size-3xl);
+  }
+
+  .careers-hero p {
+    font-size: var(--font-size-lg);
+  }
+
+  .section-header h2 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .application-content h2 {
+    font-size: var(--font-size-2xl);
+  }
+}
+.highlights {
+  list-style: none;
 }

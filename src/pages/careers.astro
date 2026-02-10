@@ -1,5 +1,30 @@
 ---
 import MyFooter from '../components/MyFooter.astro';
+
+
+import { STRAPI_URL } from 'astro:env/server';
+
+
+const cookie = Astro.cookies.get('site_lang');
+const lang = cookie?.value ;//|| 'en';
+
+// 2. Map 'ar' to 'ar-EG' if your Strapi uses specific region codes
+const strapiLocale = lang === 'ar' ? 'ar-EG' : 'en';
+
+// 3. Construct the Dynamic Path
+// Note: We use &populate=* to ensure images/relations are returned
+// const STRAPI_URL2 = "http://localhost:1337"; // Or process.env.STRAPI_URL
+const sPath = `${STRAPI_URL}/api/careers-open-postions?locale=${strapiLocale}&populate=*`;
+
+
+
+async function getCareersData(){
+  const response = await fetch(sPath);
+  const data = await response.json() ;
+  return data.data[0];
+}
+
+const CareersData = await getCareersData();
 ---
 <!DOCTYPE html>
 <html lang="en" class="page-careers">
@@ -116,8 +141,8 @@ import MyFooter from '../components/MyFooter.astro';
         <!-- Hero Section -->
         <section class="careers-hero">
             <div class="container">
-                <h1>Join Our Team</h1>
-                <p>Become part of MedSure and contribute to transforming healthcare administration</p>
+                <h1>{CareersData.PageTitle}</h1>
+                <p>{CareersData.PageDescription}</p>
             </div>
         </section>
 
@@ -125,8 +150,8 @@ import MyFooter from '../components/MyFooter.astro';
         <section class="open-positions">
             <div class="container">
                 <div class="section-header">
-                    <h2>Open Positions</h2>
-                    <p>Explore exciting career opportunities at MedSure</p>
+                    <h2>{CareersData.Title1}</h2>
+                    <p>{CareersData.Description1}</p>
                 </div>
                 
                 <div class="table-responsive">
@@ -142,11 +167,11 @@ import MyFooter from '../components/MyFooter.astro';
                         <tbody>
                             <tr>
                                 <td>
-                                    <div class="position-title">Medical Claims Officer</div>
+                                    <div class="position-title">{CareersData.OpenPositions.Position}</div>
                                 </td>
                                 <td class="department">Claims</td>
                                 <td class="location">
-                                    <i class="fas fa-map-marker-alt"></i> Cairo
+                                    <i class="fas fa-map-marker-alt"></i> {CareersData.OpenPositions.Branch}
                                 </td>
                                 <td>
                                     <a href="#apply-now" class="apply-btn">
@@ -156,11 +181,11 @@ import MyFooter from '../components/MyFooter.astro';
                             </tr>
                             <tr>
                                 <td>
-                                    <div class="position-title">Network Coordinator</div>
+                                    <div class="position-title">{CareersData.OpenPositions2.Position}</div>
                                 </td>
                                 <td class="department">Provider Network</td>
                                 <td class="location">
-                                    <i class="fas fa-map-marker-alt"></i> Cairo
+                                    <i class="fas fa-map-marker-alt"></i> {CareersData.OpenPositions2.Branch}
                                 </td>
                                 <td>
                                     <a href="#apply-now" class="apply-btn">
@@ -170,11 +195,11 @@ import MyFooter from '../components/MyFooter.astro';
                             </tr>
                             <tr>
                                 <td>
-                                    <div class="position-title">Call Center Agent</div>
+                                    <div class="position-title">{CareersData.OpenPositions3.Position}</div>
                                 </td>
                                 <td class="department">Call Center</td>
                                 <td class="location">
-                                    <i class="fas fa-map-marker-alt"></i> Cairo
+                                    <i class="fas fa-map-marker-alt"></i> {CareersData.OpenPositions3.Position}
                                 </td>
                                 <td>
                                     <a href="#apply-now" class="apply-btn">
@@ -191,17 +216,20 @@ import MyFooter from '../components/MyFooter.astro';
         <!-- Application Section -->
         <section id="apply-now" class="application-section">
             <div class="application-container">
-                <div class="application-content">
-                    <h2>Join Medsure's Growing Team!</h2>
-                    <p>At MedSure, we're committed to excellence in healthcare administration. We value innovation, dedication, and a passion for making a difference in people's lives.</p>
-                    <p>When you join our team, you'll be part of a dynamic work environment that fosters professional growth and personal development.</p>
-                    <div class="highlights">
-                        <p><i class="fas fa-check-circle text-primary"></i> Competitive salaries and benefits</p>
-                        <p><i class="fas fa-check-circle text-primary"></i> Professional development opportunities</p>
-                        <p><i class="fas fa-check-circle text-primary"></i> Supportive work environment</p>
-                        <p><i class="fas fa-check-circle text-primary"></i> Opportunities for career advancement</p>
-                    </div>
-                </div>
+               <div class="application-content" set:html={CareersData.Description2}>
+  <!-- <h2>{CareersData.Title2}</h2>
+
+  <p>{CareersData.Description2[0].children[0].text}</p>
+  <p>{CareersData.Description2[1].children[0].text}</p>
+
+  <div class="highlights">
+    <p><i class="fas fa-check-circle text-primary"></i> {CareersData.Description2[2].children[0].text}</p>
+    <p><i class="fas fa-check-circle text-primary"></i> {CareersData.Description2[3].children[0].text}</p>
+    <p><i class="fas fa-check-circle text-primary"></i> {CareersData.Description2[4].children[0].text}</p>
+    <p><i class="fas fa-check-circle text-primary"></i> {CareersData.Description2[5].children[0].text}</p>
+  </div> -->
+</div>
+
                 
                 <div class="application-form">
                     <h3>Apply Now</h3>
