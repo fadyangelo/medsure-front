@@ -1,5 +1,28 @@
 ---
 import MyFooter from '../components/MyFooter.astro';
+import { STRAPI_URL } from 'astro:env/server';
+
+
+const cookie = Astro.cookies.get('site_lang');
+const lang = cookie?.value ;//|| 'en';
+
+// 2. Map 'ar' to 'ar-EG' if your Strapi uses specific region codes
+const strapiLocale = lang === 'ar' ? 'ar-EG' : 'en';
+
+// 3. Construct the Dynamic Path
+// Note: We use &populate=* to ensure images/relations are returned
+// const STRAPI_URL2 = "http://localhost:1337"; // Or process.env.STRAPI_URL
+const sPath = `${STRAPI_URL}/api/abouts?locale=${strapiLocale}&populate=*`;
+
+
+
+async function getAboutData(){
+  const response = await fetch(sPath);
+  const data = await response.json() ;
+  return data.data[0];
+}
+
+const AboutData = await getAboutData();
 ---
 <!DOCTYPE html>
 <html lang="en" class="page-about">
@@ -116,11 +139,11 @@ import MyFooter from '../components/MyFooter.astro';
 	 <!-- Hero Section -->
         <section class="about-hero">
             <div class="container">
-                <h1>About Us</h1>
-                <p>Leading Third Party Administrator (TPA) medical services, delivering innovative healthcare administration solutions with excellence and integrity</p>
+                <h1>{AboutData.PageTitle}</h1>
+                <p>{AboutData.PageDescription}</p>
                 <div class="about-cta">
-                    <a href="/docs/MedSure corporate profile.pdf" target="_blank" class="btn btn-medical">
-                        <i class="fas fa-download"></i> Download Corporate Profile
+                    <a href={AboutData.BtnLink}target="_blank" class="btn btn-medical">
+                        <i class="fas fa-download"></i> {AboutData.BtnName}
                     </a>
                 </div>
             </div>
@@ -140,15 +163,14 @@ import MyFooter from '../components/MyFooter.astro';
             <div class="container">
                 <div class="about-content">
                     <div class="about-text">
-                        <h2>Who We Are</h2>
-						<p>MedSure is a leading Third Party Administrator (TPA) established in 2020 aiming to provide superior and differentiated medical service.
-						Backed by EGP 500M+ in capital. To be able to provide that quality of service ,
-						we had to work hard to have every sector in our company efficient and of a superior quality and now 
-						we offer our clients a dynamic expanding medical network that covers all Egyptian governorates with more than 4800 service providers that offers best quality service level and best contractual prices in the market, professional and compassionate 24/7 available approval doctors, call center agents Full-online-platform for approvals, User friendly mobile app, in addition to our professional well-selected staff</p>
-					   <p>Our comprehensive solutions connect insurers, corporates, and healthcare providers through cutting-edge technology and efficient processes, ensuring seamless healthcare delivery across Egypt.</p>
+                        <h2>{AboutData.whoWeAre}</h2>
+						<p>{AboutData.whoWeAreDescription}</p>
+					 
                     </div>
                     <div class="about-image">
-                        <img src="/images/logo-about.png" alt="MedSure" loading="lazy">
+                        <img 
+  src={`${STRAPI_URL}${AboutData.Image?.url}`}
+                         alt="MedSure" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -183,88 +205,79 @@ import MyFooter from '../components/MyFooter.astro';
             <div class="container">
                 <div class="mission-vision-grid">
                     <div class="mission-card">
-                        <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
-                        <p>Utilizing our built-up know-how, technology, capital and applying our values, we aim to achieve excellence in service quality and value creation and become a role-model in the socially responsible investment in the healthcare sector in Egypt.</p>
+                        <h3><i class="fas fa-bullseye"></i> {AboutData.Mission.title}</h3>
+                        <p>{AboutData.Mission.body}</p>
                     </div>
                     <div class="vision-card">
-                        <h3><i class="fas fa-eye"></i> Our Vision</h3>
-                        <p>To become the leading healthcare management service provider, to be an add value to the Egyptian market through becoming a benchmark in setting standards of serving stakeholders.</p>
+                        <h3><i class="fas fa-eye"></i> {AboutData.Vision.title}</h3>
+                        <p>{AboutData.Vision.body}</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Values Section -->
-        <section class="values-section">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Our Core Values</h2>
-                    <p>The foundation of everything we do</p>
-                </div>
-                <div class="values-grid">
-                    <div class="value-card">
-                        <div class="service-icon">
-							<img src="/images/core-values/Customer-Oriented.jpg" alt="Customer-Oriented" />
-						</div>
-					<!--<div class="value-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>-->
-                        <h4>Customer-Oriented</h4>
-                        <p>Our customers are at the heart of everything we do. We listen, understand, and are dedicated to providing exceptional service and support.</p>
-                    </div>
-                    <div class="value-card">
-                        <div class="service-icon">
-							<img src="/images/core-values/Transparency.jpg" alt="Transparency" />
-						</div>
-					<!--<div class="value-icon">
-                            <i class="fas fa-lightbulb"></i>
-                        </div>-->
-                        <h4>Transparency</h4>
-                        <p>We believe in open communication and clear processes. We are accountable for our actions and share information freely, fostering trust and understanding</p>
-                    </div>
-                    <div class="value-card">
-                        <div class="service-icon">
-							<img src="/images/core-values/Honesty.jpg" alt="Honesty" />
-						</div>
-					<!--<div class="value-icon">
-                            <i class="fas fa-users"></i>
-                        </div>-->
-                        <h4>Honesty</h4>
-                        <p>Honesty is the foundation of our relationships. We are truthful, sincere, and direct in all our interactions with clients, partners, and each other.</p>
-                    </div>
-                    <div class="value-card">
-                        <div class="service-icon">
-							<img src="/images/core-values/Integrity.jpg" alt="Integrity" />
-						</div>
-					<!--<div class="value-icon">
-                            <i class="fas fa-check-circle"></i>
-                        </div>-->
-                        <h4>Integrity</h4>
-                        <p>We uphold the highest ethical standards in everything we do. We are principled, reliable, and always do what is right, even when no one is watching.</p>
-                    </div>
-                    <div class="value-card">
-                        <div class="service-icon">
-							<img src="/images/core-values/Credibility.jpg" alt="Credibility" />
-						</div>
-					<!--<div class="value-icon">
-                            <i class="fas fa-bolt"></i>
-                        </div>-->
-                        <h4>Credibility</h4>
-                        <p>Our expertise and consistent delivery build trust and confidence. We are committed to excellence, ensuring that our actions and results speak for themselves.</p>
-                    </div>
-                    <div class="value-card">
-                        <div class="service-icon">
-							<img src="/images/core-values/Commitment.jpg" alt="Commitment" />
-						</div>
-					<!--<div class="value-icon">
-                            <i class="fas fa-heart"></i>
-                        </div>-->
-                        <h4>Commitment</h4>
-                        <p>We approach healthcare with empathy, understanding that behind every claim is a person seeking care.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+       <section class="values-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>{AboutData.Title}</h2>
+      <p>{AboutData.Description}</p>
+    </div>
+
+    <div class="values-grid">
+
+      <div class="value-card">
+        <div class="service-icon">
+          <img src={`${STRAPI_URL}${AboutData.CustomerOriented_FeatureImage?.url}`} alt="Customer-Oriented" />
+        </div>
+        <h4>{AboutData.CustomerOriented.Title}</h4>
+        <p>{AboutData.CustomerOriented.Description}</p>
+      </div>
+
+      <div class="value-card">
+        <div class="service-icon">
+          <img src={`${STRAPI_URL}${AboutData.Transparency_FeatureImage?.url}`} alt="Transparency" />
+        </div>
+        <h4>{AboutData.Transparency.Title}</h4>
+        <p>{AboutData.Transparency.Description}</p>
+      </div>
+
+      <div class="value-card">
+        <div class="service-icon">
+          <img src={`${STRAPI_URL}${AboutData.Honesty_FeatureImage?.url}`} alt="Honesty" />
+        </div>
+        <h4>{AboutData.Honesty.Title}</h4>
+        <p>{AboutData.Honesty.Description}</p>
+      </div>
+
+      <div class="value-card">
+        <div class="service-icon">
+          <img src={`${STRAPI_URL}${AboutData.Integrity_FeatureImage?.url}`} alt="Integrity" />
+        </div>
+        <h4>{AboutData.Integrity.Title}</h4>
+        <p>{AboutData.Integrity.Description}</p>
+      </div>
+
+      <div class="value-card">
+        <div class="service-icon">
+          <img src={`${STRAPI_URL}${AboutData.Credibility_FeatureImage?.url}`} alt="Credibility" />
+        </div>
+        <h4>{AboutData.Credibility.Title}</h4>
+        <p>{AboutData.Credibility.Description}</p>
+      </div>
+
+      <div class="value-card">
+        <div class="service-icon">
+          <img src={`${STRAPI_URL}${AboutData.Commitment_FeatureImage?.url}`} alt="Commitment" />
+        </div>
+        <h4>{AboutData.Commitment.Title}</h4>
+        <p>{AboutData.Commitment.Description}</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+>
 
         <!-- Leadership Team -->
         <!--<section class="team-section">
